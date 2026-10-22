@@ -27,35 +27,35 @@ export function Header() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-1.5">
           <div className="flex items-center gap-3">
             <span className="bg-forest-600 text-white font-black text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm">
-              TRENDING
+              CLIMATE PILLARS
             </span>
             <div className="flex items-center gap-4 text-[11.5px] font-medium text-stone-300">
               <Link
-                href="/air-conditioners/single-hose-vs-dual-hose-portable-air-conditioners"
+                href="/air-conditioners"
                 className="hover:text-white transition-colors"
               >
-                Dual-Hose vs. Single-Hose Thermodynamics
+                Cooling &amp; SACC Ratings
               </Link>
               <span className="text-stone-600">&bull;</span>
               <Link
-                href="/air-conditioners/how-to-choose-portable-air-conditioner-room-size"
+                href="/heating"
                 className="hover:text-white transition-colors"
               >
-                DOE SACC Sizing Guide
+                Heating &amp; 15A Electrical Limits
               </Link>
               <span className="text-stone-600">&bull;</span>
               <Link
-                href="/heating/space-heater-vs-central-heating"
+                href="/fans-air-circulators"
                 className="hover:text-white transition-colors"
               >
-                1,500W Space Heater vs Central Gas Heat
+                Vortex Circulation &amp; Aerodynamics
               </Link>
               <span className="text-stone-600">&bull;</span>
               <Link
-                href="/air-quality/how-to-choose-air-purifier-room-size-cadr"
+                href="/air-quality"
                 className="hover:text-white transition-colors"
               >
-                AHAM CADR 2/3 Rule
+                True HEPA &amp; CADR Filtration
               </Link>
             </div>
           </div>
@@ -70,7 +70,7 @@ export function Header() {
             </Link>
             <span className="text-stone-700">|</span>
             <Link href="/how-we-test" className="hover:text-white">
-              Testing Methodology
+              Evaluation Framework
             </Link>
             <span className="text-stone-700">|</span>
             <Link href="/editorial-policy" className="hover:text-white">

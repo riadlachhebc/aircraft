@@ -18,14 +18,16 @@ export interface CategoryInfo {
   standardsBodies: string[];
 }
 
+export type ContentStatus = "draft" | "published" | "archived";
+
 export interface Author {
   id: string;
   name: string;
   role: string;
   bio: string;
-  experienceYears: number;
-  credentials: string;
-  avatarUrl: string;
+  experienceYears?: number;
+  credentials?: string;
+  avatarUrl?: string;
 }
 
 export interface ArticleFaq {
@@ -57,6 +59,7 @@ export interface Article {
   categoryId: CategoryId;
   authorId: string;
   reviewerId?: string;
+  status: ContentStatus;
   publishedAt: string;
   updatedAt: string;
   readTimeMinutes: number;
@@ -102,6 +105,7 @@ export interface Product {
   manufacturer: string;
   modelNumber: string;
   categoryId: CategoryId;
+  status: ContentStatus;
   officialUrl: string;
   retailerUrls?: { merchant: string; url: string }[];
   approximateUsdPrice: number;

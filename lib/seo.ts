@@ -84,7 +84,7 @@ export function buildArticleSchema(article: Article, authorName: string) {
     author: {
       "@type": "Person",
       name: authorName,
-      url: `${SITE_CONFIG.domain}/about#${article.authorId}`,
+      url: `${SITE_CONFIG.domain}/about`,
     },
     publisher: {
       "@id": `${SITE_CONFIG.domain}/#organization`,

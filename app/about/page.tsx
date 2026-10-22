@@ -1,7 +1,5 @@
 import { Metadata } from "next";
-import { AUTHOR_LIST } from "@/data/authors";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { AuthorAvatar } from "@/components/AuthorAvatar";
 import { getCanonicalUrl } from "@/lib/seo";
 import { ShieldCheck, Target, HeartHandshake, Award } from "lucide-react";
 
@@ -80,42 +78,41 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Editorial Team */}
+      {/* Editorial Governance */}
       <section className="space-y-4">
         <div className="editorial-section-header">
-          <h2 className="editorial-section-title">Our Editorial & Research Team</h2>
+          <h2 className="editorial-section-title">Editorial Governance & Operations</h2>
         </div>
 
-        <div className="space-y-4">
-          {AUTHOR_LIST.map((author) => (
-            <div
-              key={author.id}
-              id={author.id}
-              className="border border-stone-300 bg-white p-5 flex flex-col sm:flex-row gap-4 items-start"
+        <div className="border border-stone-300 bg-white p-6 sm:p-8 space-y-3">
+          <h3 className="font-sans font-black text-lg uppercase tracking-tight text-black">
+            Independent Research & Future Byline Transparency
+          </h3>
+          <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+            Air Crafted Home is an independent digital publication based in the United States.
+            Our editorial staff evaluates residential heating, cooling, airflow, and indoor air
+            quality appliances against published US engineering and safety standards (including
+            DOE SACC 10 CFR § 430, ANSI/AHAM AC-1, ASHRAE 55, and UL 1278).
+          </p>
+          <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+            We do not employ synthetic pseudonyms or AI personas. As our editorial roster
+            expands, individual author profiles with verifiable building science, HVAC, or
+            energy auditing credentials will be published directly alongside signed research guides.
+          </p>
+          <div className="pt-2 flex flex-wrap gap-4 text-xs font-bold uppercase tracking-wider">
+            <a
+              href="/how-we-test"
+              className="text-forest-800 hover:text-black underline"
             >
-              <AuthorAvatar
-                src={author.avatarUrl}
-                name={author.name}
-                size="lg"
-              />
-              <div className="space-y-1 flex-1">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="font-sans font-black text-base uppercase text-black">
-                    {author.name}
-                  </h3>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-forest-800 bg-forest-50 px-2 py-0.5 border border-forest-200">
-                    {author.experienceYears}+ Years Experience
-                  </span>
-                </div>
-                <div className="text-xs font-bold text-stone-500 uppercase tracking-wider">
-                  {author.role} &middot; {author.credentials}
-                </div>
-                <p className="text-xs text-stone-600 leading-relaxed pt-1">
-                  {author.bio}
-                </p>
-              </div>
-            </div>
-          ))}
+              Read our evaluation framework &rarr;
+            </a>
+            <a
+              href="/editorial-policy"
+              className="text-forest-800 hover:text-black underline"
+            >
+              Review our editorial policy &rarr;
+            </a>
+          </div>
         </div>
       </section>
     </div>

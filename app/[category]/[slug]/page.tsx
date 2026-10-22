@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { ARTICLES, ARTICLE_LIST } from "@/data/articles";
+import { getPublishedArticles, getPublishedArticleBySlug } from "@/data/articles";
 import { CATEGORIES } from "@/data/categories";
-import { AUTHORS } from "@/data/authors";
-import { PRODUCTS } from "@/data/products";
+import { getAuthorById } from "@/data/authors";
+import { getPublishedProductBySlug } from "@/data/products";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AffiliateNotice } from "@/components/AffiliateNotice";
 import { ResponsiveTable } from "@/components/ResponsiveTable";
@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 
 export async function generateStaticParams() {
-  return ARTICLE_LIST.map((article) => ({
+  return getPublishedArticles().map((article) => ({
     category: article.categoryId,
     slug: article.slug,
   }));
@@ -40,7 +40,7 @@ export async function generateMetadata({
   params: Promise<{ category: string; slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = ARTICLES[slug];
+  const article = getPublishedArticleBySlug(slug);
   if (!article) return {};
 
   const canonical = getCanonicalUrl(`/${article.categoryId}/${article.slug}`);
@@ -82,15 +82,15 @@ export default async function ArticleDetailPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const { slug, category: catSlug } = await params;
-  const article = ARTICLES[slug];
+  const article = getPublishedArticleBySlug(slug);
 
   if (!article || article.categoryId !== catSlug) {
     notFound();
   }
 
   const category = CATEGORIES[article.categoryId];
-  const author = AUTHORS[article.authorId] || AUTHORS["marcus-vance"];
-  const reviewer = article.reviewerId ? AUTHORS[article.reviewerId] : undefined;
+  const author = getAuthorById(article.authorId);
+  const reviewer = article.reviewerId ? getAuthorById(article.reviewerId) : undefined;
 
   const breadcrumbs = [
     { name: category?.name || article.categoryId, href: `/${article.categoryId}` },
@@ -101,12 +101,12 @@ export default async function ArticleDetailPage({
   const articleSchema = buildArticleSchema(article, author.name);
 
   const relatedArticles = article.relatedArticleSlugs
-    .map((s) => ARTICLES[s])
-    .filter(Boolean);
+    .map((s) => getPublishedArticleBySlug(s))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   const relatedProducts = (article.relatedProductSlugs || [])
-    .map((s) => PRODUCTS[s])
-    .filter(Boolean);
+    .map((s) => getPublishedProductBySlug(s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
     <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-6 space-y-8">
@@ -360,7 +360,7 @@ export default async function ArticleDetailPage({
               Written by {author.name}
             </div>
             <div className="text-xs font-bold uppercase tracking-wider text-forest-800">
-              {author.role} &middot; {author.credentials}
+              {author.role}{author.credentials ? ` · ${author.credentials}` : ""}
             </div>
             <p className="text-xs text-stone-600 leading-relaxed pt-1">
               {author.bio}

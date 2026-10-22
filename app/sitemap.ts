@@ -1,8 +1,8 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/lib/seo";
 import { CATEGORY_LIST } from "@/data/categories";
-import { ARTICLE_LIST } from "@/data/articles";
-import { PRODUCT_LIST } from "@/data/products";
+import { getPublishedArticles } from "@/data/articles";
+import { getPublishedProducts } from "@/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.domain;
@@ -79,16 +79,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  // Article Pages
-  const articleRoutes: MetadataRoute.Sitemap = ARTICLE_LIST.map((art) => ({
+  // Article Pages (Published Only)
+  const articleRoutes: MetadataRoute.Sitemap = getPublishedArticles().map((art) => ({
     url: `${baseUrl}/${art.categoryId}/${art.slug}`,
     lastModified: new Date(art.updatedAt),
     changeFrequency: "monthly",
     priority: art.isFeatured ? 0.9 : 0.8,
   }));
 
-  // Product Review Pages
-  const productRoutes: MetadataRoute.Sitemap = PRODUCT_LIST.map((prod) => ({
+  // Product Review Pages (Published Only)
+  const productRoutes: MetadataRoute.Sitemap = getPublishedProducts().map((prod) => ({
     url: `${baseUrl}/reviews/${prod.slug}`,
     lastModified: new Date(prod.priceVerifiedDate),
     changeFrequency: "monthly",

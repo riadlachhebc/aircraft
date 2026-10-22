@@ -4,7 +4,7 @@ import { useState } from "react";
 import { User } from "lucide-react";
 
 interface AuthorAvatarProps {
-  src: string;
+  src?: string;
   name: string;
   size?: "sm" | "md" | "lg";
   className?: string;

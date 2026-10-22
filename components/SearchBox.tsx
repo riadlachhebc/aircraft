@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { ARTICLE_LIST } from "@/data/articles";
-import { PRODUCT_LIST } from "@/data/products";
+import { getPublishedArticles } from "@/data/articles";
+import { getPublishedProducts } from "@/data/products";
 import { CATEGORY_LIST } from "@/data/categories";
 import { Search, X, BookOpen, ShieldCheck, Tag } from "lucide-react";
 
@@ -17,7 +17,10 @@ export function SearchBox({ initialQuery = "" }: { initialQuery?: string }) {
       return { articles: [], products: [], categories: [] };
     }
 
-    const articles = ARTICLE_LIST.filter(
+    const publishedArticles = getPublishedArticles();
+    const publishedProducts = getPublishedProducts();
+
+    const articles = publishedArticles.filter(
       (a) =>
         a.title.toLowerCase().includes(trimmed) ||
         a.metaDescription.toLowerCase().includes(trimmed) ||
@@ -25,7 +28,7 @@ export function SearchBox({ initialQuery = "" }: { initialQuery?: string }) {
         a.keyTakeaways.some((k) => k.toLowerCase().includes(trimmed))
     );
 
-    const products = PRODUCT_LIST.filter(
+    const products = publishedProducts.filter(
       (p) =>
         p.name.toLowerCase().includes(trimmed) ||
         p.manufacturer.toLowerCase().includes(trimmed) ||
@@ -79,15 +82,15 @@ export function SearchBox({ initialQuery = "" }: { initialQuery?: string }) {
       {!trimmed && (
         <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
           <span className="font-black uppercase text-[10px] tracking-wider text-stone-500 mr-1">
-            HOT TOPICS:
+            EXPLORE TOPICS:
           </span>
           {[
-            "dual-hose vs single-hose",
-            "portable AC room size",
-            "operating cost formula",
-            "oil-filled radiator",
-            "CADR air purifier",
-            "bedroom airflow",
+            "Air Conditioners",
+            "Heating",
+            "Fans & Airflow",
+            "Air Quality",
+            "Energy Efficiency",
+            "Operating Costs",
           ].map((term) => (
             <button
               key={term}

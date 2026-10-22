@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { PRODUCTS, PRODUCT_LIST } from "@/data/products";
+import { getPublishedProducts, getPublishedProductBySlug } from "@/data/products";
 import { CATEGORIES } from "@/data/categories";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AffiliateNotice } from "@/components/AffiliateNotice";
@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 
 export async function generateStaticParams() {
-  return PRODUCT_LIST.map((prod) => ({
+  return getPublishedProducts().map((prod) => ({
     slug: prod.slug,
   }));
 }
@@ -33,7 +33,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = PRODUCTS[slug];
+  const product = getPublishedProductBySlug(slug);
   if (!product) return {};
 
   const canonical = getCanonicalUrl(`/reviews/${product.slug}`);
@@ -58,7 +58,7 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = PRODUCTS[slug];
+  const product = getPublishedProductBySlug(slug);
 
   if (!product) {
     notFound();
