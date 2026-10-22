@@ -113,7 +113,7 @@ export function Header() {
         <div className="flex items-center gap-2.5">
           <Link
             href="/search"
-            className="flex items-center gap-2 rounded-sm border border-stone-300 bg-stone-50 px-3 py-1.5 text-xs font-bold text-stone-700 hover:bg-stone-100 hover:border-black transition"
+            className="flex items-center gap-2 rounded-sm border border-stone-300 bg-stone-50 px-3 py-2 sm:py-1.5 text-xs font-bold text-stone-700 hover:bg-stone-100 hover:border-black transition min-h-[44px] sm:min-h-0"
             aria-label="Search articles and reviews"
           >
             <Search className="h-3.5 w-3.5 text-stone-700" aria-hidden="true" />
@@ -123,7 +123,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex xl:hidden items-center justify-center p-2 text-stone-800 hover:bg-stone-100 focus:outline-none"
+            className="inline-flex xl:hidden items-center justify-center min-h-[44px] min-w-[44px] p-2 text-stone-800 hover:bg-stone-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
             aria-label="Toggle navigation menu"

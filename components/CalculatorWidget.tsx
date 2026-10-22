@@ -246,10 +246,10 @@ export function CalculatorWidget() {
               90-Day Season
             </div>
             <div className="text-2xl sm:text-3xl font-black font-mono text-black">
-              ${(results.dailyCost * 90).toFixed(2)}
+              ${results.seasonCost.toFixed(2)}
             </div>
             <div className="text-[11px] font-mono text-stone-600 mt-0.5">
-              {(results.dailyKwhEffective * 90).toFixed(1)} kWh / season
+              {results.seasonKwh.toFixed(1)} kWh / season
             </div>
           </div>
 

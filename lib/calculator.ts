@@ -9,6 +9,21 @@ export const DEFAULT_CALCULATOR_STATE: CalculatorState = {
 };
 
 /**
+ * Sanitizes and clamps numeric inputs against NaN, non-finite values, and unrealistic bounds.
+ */
+export function sanitizeNumber(
+  val: unknown,
+  fallback: number,
+  min: number,
+  max: number
+): number {
+  if (typeof val !== "number" || !Number.isFinite(val) || Number.isNaN(val)) {
+    return fallback;
+  }
+  return Math.min(max, Math.max(min, val));
+}
+
+/**
  * Calculates energy consumption and running costs for household appliances.
  *
  * Formula:
@@ -16,49 +31,46 @@ export const DEFAULT_CALCULATOR_STATE: CalculatorState = {
  * Effective daily kWh = Daily kWh * (dutyCyclePercent / 100)
  * Daily Cost ($) = Effective daily kWh * costPerKwh
  * Period Cost ($) = Daily Cost * days
+ * Seasonal Cost ($) = Daily Cost * 90 (typical 3-month cooling or heating season)
  * Annual Cost ($) = Daily Cost * 365
  */
 export function calculateApplianceCosts(
-  input: Partial<CalculatorState>
+  input: Partial<CalculatorState> = {}
 ): CalculatorResults {
-  const watts = Math.max(0, input.watts ?? DEFAULT_CALCULATOR_STATE.watts);
-  const hoursPerDay = Math.min(
-    24,
-    Math.max(0, input.hoursPerDay ?? DEFAULT_CALCULATOR_STATE.hoursPerDay)
-  );
-  const costPerKwh = Math.max(
-    0,
-    input.costPerKwh ?? DEFAULT_CALCULATOR_STATE.costPerKwh
-  );
-  const days = Math.max(1, input.days ?? DEFAULT_CALCULATOR_STATE.days);
-  const dutyCyclePercent = Math.min(
-    100,
-    Math.max(1, input.dutyCyclePercent ?? 100)
-  );
+  const watts = sanitizeNumber(input.watts, DEFAULT_CALCULATOR_STATE.watts, 0, 25000);
+  const hoursPerDay = sanitizeNumber(input.hoursPerDay, DEFAULT_CALCULATOR_STATE.hoursPerDay, 0, 24);
+  const costPerKwh = sanitizeNumber(input.costPerKwh, DEFAULT_CALCULATOR_STATE.costPerKwh, 0, 5.0);
+  const days = sanitizeNumber(input.days, DEFAULT_CALCULATOR_STATE.days, 1, 365);
+  const dutyCyclePercent = sanitizeNumber(input.dutyCyclePercent, 100, 1, 100);
 
   const rawDailyKwh = (watts / 1000) * hoursPerDay;
   const dutyFactor = dutyCyclePercent / 100;
   const dailyKwhEffective = rawDailyKwh * dutyFactor;
 
-  const dailyCost = dailyKwhEffective * costPerKwh;
-  const periodKwh = dailyKwhEffective * days;
-  const periodCost = dailyCost * days;
-  const annualKwh = dailyKwhEffective * 365;
-  const annualCost = dailyCost * 365;
+  const dailyCostRaw = dailyKwhEffective * costPerKwh;
+  const periodKwhRaw = dailyKwhEffective * days;
+  const periodCostRaw = dailyCostRaw * days;
+  const seasonKwhRaw = dailyKwhEffective * 90;
+  const seasonCostRaw = dailyCostRaw * 90;
+  const annualKwhRaw = dailyKwhEffective * 365;
+  const annualCostRaw = dailyCostRaw * 365;
 
   return {
     dailyKwhEffective: roundTo(dailyKwhEffective, 3),
-    dailyCost: roundTo(dailyCost, 2),
-    periodKwh: roundTo(periodKwh, 2),
-    periodCost: roundTo(periodCost, 2),
-    annualKwh: roundTo(annualKwh, 2),
-    annualCost: roundTo(annualCost, 2),
+    dailyCost: roundTo(dailyCostRaw, 2),
+    periodKwh: roundTo(periodKwhRaw, 2),
+    periodCost: roundTo(periodCostRaw, 2),
+    seasonKwh: roundTo(seasonKwhRaw, 2),
+    seasonCost: roundTo(seasonCostRaw, 2),
+    annualKwh: roundTo(annualKwhRaw, 2),
+    annualCost: roundTo(annualCostRaw, 2),
   };
 }
 
-function roundTo(val: number, decimals: number): number {
+export function roundTo(val: number, decimals: number): number {
+  if (!Number.isFinite(val)) return 0;
   const factor = Math.pow(10, decimals);
-  return Math.round(val * factor) / factor;
+  return Math.round((val + Number.EPSILON) * factor) / factor;
 }
 
 /**

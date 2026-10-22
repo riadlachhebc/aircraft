@@ -158,6 +158,8 @@ export interface CalculatorResults {
   dailyCost: number;
   periodKwh: number;
   periodCost: number;
+  seasonKwh: number;
+  seasonCost: number;
   annualKwh: number;
   annualCost: number;
 }

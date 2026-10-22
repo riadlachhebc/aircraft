@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none">
+  <rect width="400" height="80" fill="transparent"/>
+  <g transform="translate(10, 15)">
+    <rect x="0" y="0" width="50" height="50" rx="6" fill="#0a0a0a" />
+    <path d="M12 18 Q 25 12 38 18" stroke="#2d5a3f" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <path d="M10 25 Q 25 20 40 25" stroke="#4a825e" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <path d="M14 32 Q 25 28 36 32" stroke="#a3c9b1" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <circle cx="25" cy="40" r="2.5" fill="#2d5a3f"/>
+  </g>
+  <text x="72" y="38" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="20" letter-spacing="-0.03em" fill="#0a0a0a">AIR CRAFTED</text>
+  <text x="212" y="38" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="400" font-size="20" letter-spacing="-0.02em" fill="#2d5a3f">HOME</text>
+  <text x="72" y="54" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-weight="700" font-size="8.5" letter-spacing="0.15em" fill="#57534e">INDOOR CLIMATE RESEARCH &amp; REVIEWS</text>
+</svg>

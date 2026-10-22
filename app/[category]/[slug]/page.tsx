@@ -10,6 +10,8 @@ import { AffiliateNotice } from "@/components/AffiliateNotice";
 import { ResponsiveTable } from "@/components/ResponsiveTable";
 import { ProductCard } from "@/components/ProductCard";
 import { ArticleCard } from "@/components/ArticleCard";
+import { SafeImage } from "@/components/SafeImage";
+import { AuthorAvatar } from "@/components/AuthorAvatar";
 import {
   getCanonicalUrl,
   buildArticleSchema,
@@ -151,11 +153,10 @@ export default async function ArticleDetailPage({
         {/* Author Byline & Peer Reviewer */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-stone-200 text-xs">
           <div className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <AuthorAvatar
               src={author.avatarUrl}
-              alt={author.name}
-              className="h-10 w-10 rounded-full object-cover border border-black"
+              name={author.name}
+              size="md"
             />
             <div>
               <div className="font-bold text-black uppercase tracking-wider text-[11px]">
@@ -178,13 +179,13 @@ export default async function ArticleDetailPage({
 
       {/* Hero Image */}
       <div className="relative aspect-video w-full overflow-hidden border border-black bg-stone-100">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SafeImage
           src={article.heroImage}
           alt={article.heroImageAlt}
-          className="h-full w-full object-cover"
+          categoryId={article.categoryId}
+          priority={true}
         />
-        <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-0.5 text-[10px] font-mono text-white">
+        <div className="absolute bottom-2 right-2 z-10 bg-black/80 px-2 py-0.5 text-[10px] font-mono text-white">
           {article.heroImageAlt}
         </div>
       </div>
@@ -349,11 +350,10 @@ export default async function ArticleDetailPage({
       {/* Author Biography Box */}
       <section className="border-2 border-black bg-stone-50 p-5 sm:p-6">
         <div className="flex flex-col sm:flex-row items-start gap-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <AuthorAvatar
             src={author.avatarUrl}
-            alt={author.name}
-            className="h-16 w-16 rounded-full object-cover border-2 border-black shrink-0"
+            name={author.name}
+            size="lg"
           />
           <div className="space-y-1">
             <div className="font-sans font-black text-base uppercase text-black">

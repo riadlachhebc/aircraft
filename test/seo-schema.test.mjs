@@ -47,7 +47,7 @@ test("Structured Data: Article schema contains author, publisher, and FAQs", () 
   assert.ok(schema.hasPart.mainEntity.length > 0);
 });
 
-test("Structured Data: Product schema contains valid Offer and Brand", () => {
+test("Structured Data: Product schema contains valid Offer and Brand without fabricated inventory", () => {
   const sampleProduct = PRODUCTS["midea-duo-12000-btu-portable-ac"];
   assert.ok(sampleProduct);
   const schema = buildProductSchema(sampleProduct);
@@ -56,4 +56,7 @@ test("Structured Data: Product schema contains valid Offer and Brand", () => {
   assert.equal(schema.brand.name, "Midea");
   assert.equal(schema.offers.priceCurrency, "USD");
   assert.equal(schema.offers.price, 549);
+  // Guarantee no fabricated InStock claim in editorial schema
+  assert.equal(schema.offers.availability, undefined);
+  assert.equal(schema.offers.itemCondition, "https://schema.org/NewCondition");
 });

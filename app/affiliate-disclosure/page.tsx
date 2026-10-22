@@ -22,15 +22,15 @@ export default function AffiliateDisclosurePage() {
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       <Breadcrumbs items={breadcrumbs} />
 
-      <header className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-12 shadow-sm space-y-3">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-900">
-          <DollarSign className="h-3.5 w-3.5 text-amber-700" />
-          FTC Compliance & Transparency
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-10 space-y-2">
+        <div className="inline-flex items-center gap-1.5 bg-black text-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider">
+          <DollarSign className="h-3 w-3 text-amber-400" />
+          <span>FTC Compliance & Transparency</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+        <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-black">
           Affiliate Relationship & Monetization Disclosure
         </h1>
-        <p className="text-base text-stone-600 leading-relaxed">
+        <p className="text-sm sm:text-base text-stone-700 leading-relaxed font-normal max-w-2xl">
           In compliance with Federal Trade Commission (FTC) guidelines concerning
           the use of endorsements and testimonials in advertising (16 CFR Part 255),
           this page explains how Air Crafted Home sustains its operations through
@@ -38,9 +38,9 @@ export default function AffiliateDisclosurePage() {
         </p>
       </header>
 
-      <section className="space-y-6 text-stone-700 text-xs sm:text-sm leading-relaxed">
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900">
+      <section className="space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900">
             How Affiliate Referrals Work
           </h2>
           <p>
@@ -56,8 +56,8 @@ export default function AffiliateDisclosurePage() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900">
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900">
             Editorial Independence Guarantee
           </h2>
           <p>
@@ -81,15 +81,15 @@ export default function AffiliateDisclosurePage() {
           </ul>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900">
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900">
             Technical Implementation of Referral Links
           </h2>
           <p>
             To protect reader security and prevent open redirects, our affiliate links
             route through a dedicated, server-side verified endpoint:
           </p>
-          <div className="rounded bg-stone-50 p-3 font-mono text-xs text-stone-800 border border-stone-200">
+          <div className="bg-stone-50 p-3 font-mono text-xs text-stone-800 border border-stone-200">
             https://aircraftedhome.com/go/[brand-product]
           </div>
           <p className="pt-1">
@@ -100,19 +100,19 @@ export default function AffiliateDisclosurePage() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-6 shadow-sm space-y-2 text-amber-900">
-          <div className="flex items-center gap-2 font-serif font-bold text-base">
-            <ShieldAlert className="h-5 w-5 text-amber-700" />
+        <div className="border border-amber-300 bg-amber-50/50 p-5 space-y-2 text-amber-950">
+          <div className="flex items-center gap-2 font-sans font-black text-sm uppercase tracking-wider">
+            <ShieldAlert className="h-4 w-4 text-amber-700" />
             <span>Questions Regarding Our Affiliate Relationships?</span>
           </div>
           <p>
             If you have questions about specific product links, merchant partnerships,
             or how our referral system operates, please reach out directly through our{" "}
-            <Link href="/contact" className="underline font-semibold hover:text-amber-950">
+            <Link href="/contact" className="underline font-bold hover:text-amber-900">
               contact form
             </Link>{" "}
             or review our{" "}
-            <Link href="/editorial-policy" className="underline font-semibold hover:text-amber-950">
+            <Link href="/editorial-policy" className="underline font-bold hover:text-amber-900">
               Editorial Policy
             </Link>
             .

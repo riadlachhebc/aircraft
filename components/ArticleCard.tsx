@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Article } from "@/lib/types";
 import { CATEGORIES } from "@/data/categories";
+import { SafeImage } from "./SafeImage";
 import { Clock } from "lucide-react";
 
 export function ArticleCard({
@@ -20,14 +21,13 @@ export function ArticleCard({
           href={`/${article.categoryId}/${article.slug}`}
           className="relative aspect-[16/10] sm:w-56 shrink-0 overflow-hidden bg-stone-100"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <SafeImage
             src={article.heroImage}
             alt={article.heroImageAlt}
-            loading="lazy"
-            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+            categoryId={article.categoryId}
+            className="transition duration-300 group-hover:scale-105"
           />
-          <span className="absolute top-2 left-2 bg-stone-900 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
+          <span className="absolute top-2 left-2 z-10 bg-stone-900 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
             {category?.name || article.categoryId}
           </span>
         </Link>
@@ -68,14 +68,13 @@ export function ArticleCard({
         href={`/${article.categoryId}/${article.slug}`}
         className="relative aspect-[16/10] w-full overflow-hidden bg-stone-100"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SafeImage
           src={article.heroImage}
           alt={article.heroImageAlt}
-          loading="lazy"
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          categoryId={article.categoryId}
+          className="transition duration-300 group-hover:scale-105"
         />
-        <div className="absolute top-2 left-2">
+        <div className="absolute top-2 left-2 z-10">
           <span className="bg-stone-900/90 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
             {category?.name || article.categoryId}
           </span>

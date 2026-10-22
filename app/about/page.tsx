@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { AUTHOR_LIST } from "@/data/authors";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { AuthorAvatar } from "@/components/AuthorAvatar";
 import { getCanonicalUrl } from "@/lib/seo";
 import { ShieldCheck, Target, HeartHandshake, Award } from "lucide-react";
 
@@ -92,11 +93,10 @@ export default function AboutPage() {
               id={author.id}
               className="border border-stone-300 bg-white p-5 flex flex-col sm:flex-row gap-4 items-start"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <AuthorAvatar
                 src={author.avatarUrl}
-                alt={author.name}
-                className="h-16 w-16 rounded-full object-cover border-2 border-black shrink-0"
+                name={author.name}
+                size="lg"
               />
               <div className="space-y-1 flex-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">

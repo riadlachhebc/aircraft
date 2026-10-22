@@ -3,6 +3,7 @@ import { SearchBox } from "@/components/SearchBox";
 import { CalculatorWidget } from "@/components/CalculatorWidget";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ProductCard } from "@/components/ProductCard";
+import { SafeImage } from "@/components/SafeImage";
 import { CATEGORY_LIST } from "@/data/categories";
 import { ARTICLE_LIST, ARTICLES } from "@/data/articles";
 import { PRODUCT_LIST } from "@/data/products";
@@ -50,13 +51,14 @@ export default function HomePage() {
                 href={`/${leadStory.categoryId}/${leadStory.slug}`}
                 className="block relative aspect-[16/9] w-full overflow-hidden bg-black"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <SafeImage
                   src={leadStory.heroImage}
                   alt={leadStory.heroImageAlt}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  categoryId={leadStory.categoryId}
+                  priority={true}
+                  className="transition duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                 />
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
                   <span className="bg-forest-700 text-white font-black text-xs uppercase tracking-wider px-2.5 py-1">
                     FEATURED INVESTIGATION
                   </span>
@@ -201,12 +203,13 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Journey A: Cooling & Airflow */}
           <div className="group relative aspect-[16/9] overflow-hidden border border-black bg-stone-900 flex flex-col justify-end p-6 sm:p-8 text-white">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=800&q=80"
-              alt="Air conditioning and airflow testing"
-              className="absolute inset-0 h-full w-full object-cover opacity-40 transition duration-500 group-hover:scale-105"
-            />
+            <div className="absolute inset-0 opacity-40 transition duration-500 group-hover:scale-105">
+              <SafeImage
+                src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=800&q=80"
+                alt="Air conditioning and airflow testing"
+                categoryId="air-conditioners"
+              />
+            </div>
             <div className="relative z-10 space-y-2">
               <span className="bg-forest-700 text-white text-[10px] font-black uppercase tracking-widest px-2 py-0.5">
                 THERMODYNAMICS & AIRFLOW
@@ -231,12 +234,13 @@ export default function HomePage() {
 
           {/* Journey B: Heating & Indoor Air Quality */}
           <div className="group relative aspect-[16/9] overflow-hidden border border-black bg-stone-900 flex flex-col justify-end p-6 sm:p-8 text-white">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80"
-              alt="Residential warming and indoor air quality"
-              className="absolute inset-0 h-full w-full object-cover opacity-40 transition duration-500 group-hover:scale-105"
-            />
+            <div className="absolute inset-0 opacity-40 transition duration-500 group-hover:scale-105">
+              <SafeImage
+                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80"
+                alt="Residential warming and indoor air quality"
+                categoryId="heating"
+              />
+            </div>
             <div className="relative z-10 space-y-2">
               <span className="bg-amber-600 text-white text-[10px] font-black uppercase tracking-widest px-2 py-0.5">
                 ZONE HEATING & FILTRATION

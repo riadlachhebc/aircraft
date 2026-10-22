@@ -121,13 +121,13 @@ export function buildProductSchema(product: Product) {
     },
     model: product.modelNumber,
     description: product.bestFor,
+    category: product.categoryId,
     offers: {
       "@type": "Offer",
       price: product.approximateUsdPrice,
       priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
       url: product.officialUrl,
-      priceValidUntil: "2027-12-31",
+      itemCondition: "https://schema.org/NewCondition",
     },
   };
 }

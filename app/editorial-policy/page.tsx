@@ -19,26 +19,26 @@ export default function EditorialPolicyPage() {
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       <Breadcrumbs items={breadcrumbs} />
 
-      <header className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-12 shadow-sm space-y-3">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3 py-1 text-xs font-semibold text-forest-800">
-          <FileCheck className="h-3.5 w-3.5 text-forest-700" />
-          Editorial Independence
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-10 space-y-2">
+        <div className="inline-flex items-center gap-1.5 bg-black text-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider">
+          <FileCheck className="h-3 w-3 text-forest-400" />
+          <span>Editorial Independence</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+        <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-black">
           Editorial Policy & Integrity Standards
         </h1>
-        <p className="text-base text-stone-600 leading-relaxed">
+        <p className="text-sm sm:text-base text-stone-700 leading-relaxed font-normal max-w-2xl">
           Air Crafted Home is committed to producing technical, evidence-based
           content that readers can trust with their homes, health, and budgets.
           Here are the non-negotiable rules governing our editorial output.
         </p>
       </header>
 
-      <section className="space-y-6">
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-forest-700" />
-            1. Separation of Editorial and Commercial Interests
+      <section className="space-y-4">
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-forest-700" />
+            <span>1. Separation of Editorial and Commercial Interests</span>
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
             Our editorial staff does not receive compensation from manufacturers
@@ -49,10 +49,10 @@ export default function EditorialPolicyPage() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-forest-700" />
-            2. Primary Sourcing and Verification Standards
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-forest-700" />
+            <span>2. Primary Sourcing and Verification Standards</span>
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
             We prioritize authoritative, verifiable primary sources:
@@ -76,10 +76,10 @@ export default function EditorialPolicyPage() {
           </ul>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-forest-700" />
-            3. Accuracy and Corrections Policy
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-forest-700" />
+            <span>3. Accuracy and Corrections Policy</span>
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
             When factual errors, outdated specifications, or superseded regulatory
@@ -90,7 +90,7 @@ export default function EditorialPolicyPage() {
           <div className="pt-2">
             <a
               href="/contact"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest-800 hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-forest-800 hover:underline"
             >
               <Mail className="h-3.5 w-3.5" />
               <span>Submit a technical correction or question &rarr;</span>
@@ -98,10 +98,10 @@ export default function EditorialPolicyPage() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-forest-700" />
-            4. Real Author Identities and Byline Accountability
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-base uppercase text-stone-900 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-forest-700" />
+            <span>4. Real Author Identities and Byline Accountability</span>
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
             Every published guide and review is attributed to an identified writer
