@@ -96,7 +96,7 @@ export default function RootLayout({
         {/* Impact Radius Site Verification */}
         <meta
           name="impact-site-verification"
-          value="542aef4a-b448-4af9-b8c1-b0286f0b177e"
+          {...{ value: "542aef4a-b448-4af9-b8c1-b0286f0b177e" }}
         />
         {/* Google tag (gtag.js) */}
         <script
