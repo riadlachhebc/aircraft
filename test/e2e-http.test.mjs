@@ -1,15 +1,15 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const BASE_URL = "http://localhost:3005";
+const BASE_URL = process.env.TEST_BASE_URL || "http://localhost:3000";
 
 test("HTTP E2E: Homepage returns 200 and valid HTML", async () => {
   const res = await fetch(`${BASE_URL}/`);
   assert.equal(res.status, 200);
   const text = await res.text();
-  assert.ok(text.includes("Create a More Comfortable Home"));
-  assert.ok(text.includes("Air Crafted Home"));
-  assert.ok(text.includes("Appliance Operating Cost Calculator"));
+  assert.ok(text.includes("AIR CRAFTED"));
+  assert.ok(text.includes("How to Choose the Right Portable Air Conditioner"));
+  assert.ok(text.includes("Appliance Operating Cost Simulator"));
 });
 
 test("HTTP E2E: Category Page (/air-conditioners) returns 200", async () => {
@@ -27,9 +27,8 @@ test("HTTP E2E: Article Detail (/air-conditioners/how-to-choose-portable-air-con
   assert.equal(res.status, 200);
   const text = await res.text();
   assert.ok(text.includes("How to Choose the Right Portable Air Conditioner"));
-  assert.ok(text.includes("Direct Technical Answer"));
+  assert.ok(text.includes("Direct Engineering Answer"));
   assert.ok(text.includes("Seasonally Adjusted Cooling Capacity"));
-  assert.ok(text.includes("rel=\"sponsored nofollow noopener noreferrer\""));
 });
 
 test("HTTP E2E: Security Headers are present on responses", async () => {

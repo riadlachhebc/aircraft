@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, Zap, ArrowRight, ShieldCheck } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/air-conditioners", label: "Air Conditioners" },
@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { href: "/air-quality", label: "Air Quality" },
   { href: "/energy-efficiency", label: "Energy & Costs" },
   { href: "/buying-guides", label: "Buying Guides" },
-  { href: "/reviews", label: "Reviews" },
+  { href: "/reviews", label: "Gear Reviews" },
 ];
 
 export function Header() {
@@ -21,15 +21,73 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-stone-200/80 bg-stone-50/95 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-40 w-full border-b border-stone-200 bg-white">
+      {/* 1. Top Magazine Ticker Bar */}
+      <div className="hidden lg:block border-b border-stone-200 bg-stone-900 text-stone-200 text-xs">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-1.5">
+          <div className="flex items-center gap-3">
+            <span className="bg-forest-600 text-white font-black text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-sm">
+              TRENDING
+            </span>
+            <div className="flex items-center gap-4 text-[11.5px] font-medium text-stone-300">
+              <Link
+                href="/air-conditioners/single-hose-vs-dual-hose-portable-air-conditioners"
+                className="hover:text-white transition-colors"
+              >
+                Dual-Hose vs. Single-Hose Thermodynamics
+              </Link>
+              <span className="text-stone-600">&bull;</span>
+              <Link
+                href="/air-conditioners/how-to-choose-portable-air-conditioner-room-size"
+                className="hover:text-white transition-colors"
+              >
+                DOE SACC Sizing Guide
+              </Link>
+              <span className="text-stone-600">&bull;</span>
+              <Link
+                href="/heating/space-heater-vs-central-heating"
+                className="hover:text-white transition-colors"
+              >
+                1,500W Space Heater vs Central Gas Heat
+              </Link>
+              <span className="text-stone-600">&bull;</span>
+              <Link
+                href="/air-quality/how-to-choose-air-purifier-room-size-cadr"
+                className="hover:text-white transition-colors"
+              >
+                AHAM CADR 2/3 Rule
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 text-[11px] font-semibold text-stone-400">
+            <Link
+              href="/energy-efficiency#calculator"
+              className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300"
+            >
+              <Zap className="h-3 w-3" />
+              <span>Cost Calculator</span>
+            </Link>
+            <span className="text-stone-700">|</span>
+            <Link href="/how-we-test" className="hover:text-white">
+              Testing Methodology
+            </Link>
+            <span className="text-stone-700">|</span>
+            <Link href="/editorial-policy" className="hover:text-white">
+              Editorial Policy
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Main Editorial Masthead */}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5">
-        {/* Brand Logo */}
         <Logo />
 
         {/* Desktop Primary Navigation */}
         <nav
           aria-label="Primary navigation"
-          className="hidden xl:flex items-center gap-1 text-[13.5px] font-medium text-stone-700"
+          className="hidden xl:flex items-center gap-0.5 text-xs font-black uppercase tracking-wider text-stone-800"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -39,10 +97,10 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-md px-2.5 py-1.5 transition-colors ${
+                className={`relative px-3 py-2 transition-colors hover:text-forest-700 ${
                   isActive
-                    ? "bg-forest-700/10 text-forest-800 font-semibold"
-                    : "hover:bg-stone-200/60 hover:text-stone-900"
+                    ? "text-forest-800 font-black border-b-2 border-forest-700 -mb-px"
+                    : "text-stone-800"
                 }`}
               >
                 {link.label}
@@ -51,21 +109,21 @@ export function Header() {
           })}
         </nav>
 
-        {/* Right Action: Search & Mobile Menu Button */}
-        <div className="flex items-center gap-2">
+        {/* Search & Actions */}
+        <div className="flex items-center gap-2.5">
           <Link
             href="/search"
-            className="flex items-center gap-1.5 rounded-full border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-600 shadow-sm transition hover:border-forest-600 hover:text-forest-800"
+            className="flex items-center gap-2 rounded-sm border border-stone-300 bg-stone-50 px-3 py-1.5 text-xs font-bold text-stone-700 hover:bg-stone-100 hover:border-black transition"
             aria-label="Search articles and reviews"
           >
-            <Search className="h-3.5 w-3.5 text-stone-500" aria-hidden="true" />
-            <span className="hidden sm:inline">Search site...</span>
+            <Search className="h-3.5 w-3.5 text-stone-700" aria-hidden="true" />
+            <span className="hidden sm:inline uppercase tracking-wider text-[11px]">Search</span>
           </Link>
 
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex xl:hidden items-center justify-center rounded-md p-2 text-stone-700 hover:bg-stone-200/60 focus:outline-none focus:ring-2 focus:ring-forest-700"
+            className="inline-flex xl:hidden items-center justify-center p-2 text-stone-800 hover:bg-stone-100 focus:outline-none"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
             aria-label="Toggle navigation menu"
@@ -83,11 +141,11 @@ export function Header() {
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="xl:hidden border-b border-stone-200 bg-white px-4 pt-2 pb-6 shadow-lg"
+          className="xl:hidden border-b border-stone-300 bg-white px-4 pt-3 pb-6 shadow-xl"
         >
           <nav
             aria-label="Mobile navigation"
-            className="flex flex-col space-y-1"
+            className="flex flex-col space-y-2 text-sm font-bold uppercase tracking-wide"
           >
             {NAV_LINKS.map((link) => {
               const isActive =
@@ -98,35 +156,36 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`rounded-md px-3 py-2 text-sm font-medium ${
+                  className={`border-b border-stone-100 py-2.5 ${
                     isActive
-                      ? "bg-forest-50 text-forest-800 font-semibold"
-                      : "text-stone-700 hover:bg-stone-100"
+                      ? "text-forest-800 font-black pl-2 border-l-2 border-l-forest-800"
+                      : "text-stone-900 hover:text-forest-700"
                   }`}
                 >
                   {link.label}
                 </Link>
               );
             })}
-            <div className="pt-3 mt-2 border-t border-stone-100">
+            <div className="pt-3 text-xs normal-case tracking-normal text-stone-500 space-y-2 font-medium">
               <Link
-                href="/about"
+                href="/energy-efficiency#calculator"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-1.5 text-xs text-stone-500 hover:text-stone-800"
+                className="flex items-center gap-1.5 font-bold text-forest-800"
               >
-                About Our Mission
+                <Zap className="h-3.5 w-3.5" />
+                <span>Operating Cost Calculator</span>
               </Link>
               <Link
                 href="/how-we-test"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-1.5 text-xs text-stone-500 hover:text-stone-800"
+                className="block"
               >
                 How We Test & Research
               </Link>
               <Link
                 href="/affiliate-disclosure"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-1.5 text-xs text-stone-500 hover:text-stone-800"
+                className="block text-amber-800 font-semibold"
               >
                 Affiliate Disclosure
               </Link>

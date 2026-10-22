@@ -2,21 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --bg-parchment: #FAF9F6;
-  --text-charcoal: #1E293B;
-  --forest-green: #244A36;
-  --sage-green: #5D7B6C;
-  --warm-amber: #D97706;
-}
-
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--bg-parchment);
-    color: var(--text-charcoal);
+    background-color: #FFFFFF;
+    color: #111213;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -29,10 +19,10 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: var(--font-sans);
-    line-height: 1.6;
-    background-color: #FAF9F6;
-    color: #1E293B;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    background-color: #FFFFFF;
+    color: #111213;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -43,9 +33,45 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid #244A36;
+    outline: 2px solid #15803D;
     outline-offset: 2px;
   }
+}
+
+/* Magazine Editorial Heading Accents */
+.editorial-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.editorial-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #111213;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.editorial-section-title {
+  font-size: 1.125rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #111213;
+}
+
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
 }
 
 /* Modern Responsive Table Styles following Modern Web Guidance */
@@ -53,13 +79,12 @@
   overflow: auto;
   max-inline-size: 100%;
   container-type: inline-size;
-  border-radius: 0.5rem;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #E2E5E8;
   background-color: #FFFFFF;
 }
 
 .table-wrapper:focus-visible {
-  outline: 2px solid #244A36;
+  outline: 2px solid #15803D;
   outline-offset: 2px;
 }
 
@@ -68,32 +93,35 @@
   border-collapse: separate;
   border-spacing: 0;
   text-align: left;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
 }
 
 .modern-data-table thead {
   position: sticky;
   inset-block-start: 0;
   z-index: 10;
-  background-color: #F8FAFC;
+  background-color: #F8F9FA;
 }
 
 .modern-data-table th {
-  padding: 0.875rem 1rem;
-  font-weight: 600;
-  color: #0F172A;
-  border-bottom: 2px solid #CBD5E1;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #111213;
+  border-bottom: 2px solid #111213;
 }
 
 .modern-data-table td {
   padding: 0.875rem 1rem;
-  color: #334155;
-  border-bottom: 1px solid #F1F5F9;
+  color: #27272A;
+  border-bottom: 1px solid #F1F3F5;
   vertical-align: top;
 }
 
 .modern-data-table tbody tr:hover {
-  background-color: #F8FAFC;
+  background-color: #F9FAFB;
 }
 
 /* Container query for narrow viewports */
@@ -113,24 +141,25 @@
 
   .modern-data-table tr {
     margin-bottom: 1rem;
-    border: 1px solid #E2E8F0;
-    border-radius: 0.375rem;
+    border: 1px solid #E2E5E8;
     background-color: #FFFFFF;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 
   .modern-data-table td {
     display: flex;
     justify-content: space-between;
     padding: 0.75rem;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid #F1F3F5;
     text-align: right;
   }
 
   .modern-data-table td::before {
     content: attr(data-label);
-    font-weight: 600;
-    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: #71717A;
     text-align: left;
     padding-right: 1rem;
   }

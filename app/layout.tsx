@@ -87,13 +87,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-[#FAF9F6] text-stone-900 antialiased selection:bg-forest-100 selection:text-forest-900">
+      <body className="flex min-h-screen flex-col bg-white text-stone-900 antialiased selection:bg-forest-100 selection:text-forest-900">
         {/* Skip Link for WCAG 2.2 AA Keyboard Navigation */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-forest-800 focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-black focus:px-4 focus:py-2 focus:text-xs focus:font-bold focus:uppercase focus:text-white focus:outline-none"
         >
-          Skip to main editorial content
+          Skip to main content
         </a>
 
         <Header />

@@ -3,19 +3,19 @@ import { Logo } from "./Logo";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-stone-200 bg-stone-900 text-stone-300">
+    <footer className="mt-auto border-t-2 border-black bg-stone-950 text-stone-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-stone-800">
           {/* Brand Info & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <Logo variant="light" />
-            <p className="text-sm text-stone-400 leading-relaxed max-w-md">
+            <p className="text-xs text-stone-400 leading-relaxed max-w-sm">
               Air Crafted Home is an independent editorial publication dedicated
               to helping US homeowners and apartment renters engineer the perfect
               indoor climate through thermodynamic research, transparent product
               comparisons, and verified energy-cost calculations.
             </p>
-            <div className="pt-2 text-xs text-stone-500">
+            <div className="text-[11px] font-mono text-stone-500">
               Primary Market: United States (120V / 60Hz, US Customary Units,
               DOE/EPA Standards)
             </div>
@@ -23,10 +23,10 @@ export function Footer() {
 
           {/* Core Categories */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-100">
+            <h3 className="text-xs font-black uppercase tracking-wider text-white mb-3">
               Climate Categories
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs font-medium">
               <li>
                 <Link
                   href="/air-conditioners"
@@ -72,10 +72,10 @@ export function Footer() {
 
           {/* Guides & Tools */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-100">
+            <h3 className="text-xs font-black uppercase tracking-wider text-white mb-3">
               Research & Tools
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs font-medium">
               <li>
                 <Link
                   href="/buying-guides"
@@ -95,9 +95,9 @@ export function Footer() {
               <li>
                 <Link
                   href="/energy-efficiency#calculator"
-                  className="hover:text-white transition-colors"
+                  className="text-emerald-400 hover:text-emerald-300 transition-colors font-bold"
                 >
-                  Appliance Cost Calculator
+                  Appliance Cost Simulator
                 </Link>
               </li>
               <li>
@@ -121,10 +121,10 @@ export function Footer() {
 
           {/* Institutional & Legal */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-100">
+            <h3 className="text-xs font-black uppercase tracking-wider text-white mb-3">
               Company & Legal
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs font-medium">
               <li>
                 <Link
                   href="/about"
@@ -144,7 +144,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/affiliate-disclosure"
-                  className="hover:text-white transition-colors font-medium text-amber-300"
+                  className="text-amber-400 hover:text-amber-300 font-bold transition-colors"
                 >
                   Affiliate Disclosure
                 </Link>
@@ -170,8 +170,8 @@ export function Footer() {
         </div>
 
         {/* FTC Affiliate Disclosure Footer Banner */}
-        <div className="mt-12 border-t border-stone-800 pt-8 text-xs text-stone-400 leading-relaxed">
-          <p className="font-semibold text-stone-300 mb-1">
+        <div className="pt-8 text-[11px] text-stone-400 leading-relaxed">
+          <p className="font-bold text-stone-200 uppercase tracking-wider text-[10px] mb-1">
             FTC Affiliate Disclosure Notice:
           </p>
           <p>
@@ -184,14 +184,14 @@ export function Footer() {
             See our full{" "}
             <Link
               href="/affiliate-disclosure"
-              className="text-stone-300 underline hover:text-white"
+              className="text-white underline hover:text-stone-300"
             >
               Affiliate Disclosure
             </Link>{" "}
             and{" "}
             <Link
               href="/editorial-policy"
-              className="text-stone-300 underline hover:text-white"
+              className="text-white underline hover:text-stone-300"
             >
               Editorial Policy
             </Link>
@@ -199,7 +199,7 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 border-t border-stone-800/60 pt-6">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-stone-500 border-t border-stone-900 pt-6">
           <p>
             &copy; {new Date().getFullYear()} Air Crafted Home. All rights
             reserved. Domain: https://aircraftedhome.com

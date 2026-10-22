@@ -20,34 +20,32 @@ export default function ReviewsIndexPage() {
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Breadcrumbs items={breadcrumbs} />
 
-      <header className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-12 shadow-sm">
-        <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3 py-1 text-xs font-semibold text-forest-800">
-            <ShieldCheck className="h-3.5 w-3.5 text-forest-700" />
-            Structured Product Registry
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
-            Appliance Reviews & Specification Sheets
-          </h1>
-          <p className="text-base text-stone-600 leading-relaxed">
-            We evaluate home comfort appliances against traceable engineering
-            metrics: DOE SACC cooling, AHAM verified CADR ratings, nameplate
-            electrical draw, and realistic operating noise levels. We never use
-            unverified star scores or artificial badges.
-          </p>
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-10 space-y-2">
+        <div className="inline-flex items-center gap-1.5 bg-forest-800 text-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider">
+          <ShieldCheck className="h-3 w-3" />
+          <span>Structured Product Registry</span>
         </div>
+        <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-black">
+          Appliance Reviews & Specification Sheets
+        </h1>
+        <p className="text-sm text-stone-700 leading-relaxed max-w-2xl">
+          We evaluate home comfort appliances against traceable engineering
+          metrics: DOE SACC cooling, AHAM verified CADR ratings, nameplate
+          electrical draw, and realistic operating noise levels. We never use
+          unverified star scores or artificial badges.
+        </p>
       </header>
 
       <AffiliateNotice />
 
-      <section className="space-y-6">
+      <section className="space-y-5">
         {PRODUCT_LIST.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

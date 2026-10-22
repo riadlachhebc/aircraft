@@ -10,37 +10,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        parchment: {
-          50: "#FAF9F6",
-          100: "#F5F2EB",
-          200: "#EAE4D7",
-          300: "#DDD4C1",
-          900: "#2C2824",
+        dark: {
+          950: "#0C0D0E",
+          900: "#131517",
+          850: "#1A1D20",
+          800: "#22262B",
+          700: "#32373F",
+          600: "#4B535E",
+        },
+        editorial: {
+          black: "#111213",
+          charcoal: "#1F2327",
+          muted: "#606770",
+          border: "#E2E5E8",
+          surface: "#F8F9FA",
+          cream: "#FAF8F5",
         },
         forest: {
-          50: "#F0F7F4",
-          100: "#D8ECE3",
-          200: "#B3DAC9",
-          600: "#2D5A43",
-          700: "#244A36",
-          800: "#1B3B2B",
-          900: "#132A1F",
+          50: "#F0FDF4",
+          100: "#DCFCE7",
+          200: "#BBF7D0",
+          500: "#22C55E",
+          600: "#16A34A",
+          700: "#15803D",
+          800: "#166534",
+          900: "#14532D",
+          950: "#052E16",
         },
-        sage: {
-          50: "#F4F7F5",
-          100: "#E3ECE6",
-          200: "#C7D8CE",
-          500: "#5D7B6C",
-          700: "#3D5248",
-          800: "#2C3D35",
-        },
-        slate: {
-          850: "#151F30",
-          950: "#0B1120",
+        amber: {
+          400: "#FBBF24",
+          500: "#F59E0B",
+          600: "#D97706",
+          700: "#B45309",
         },
       },
       fontFamily: {
-        serif: ["Georgia", "Cambria", "Times New Roman", "serif"],
         sans: [
           "-apple-system",
           "BlinkMacSystemFont",
@@ -50,6 +54,12 @@ export default {
           "Arial",
           "sans-serif",
         ],
+        serif: [
+          "Georgia",
+          "Cambria",
+          "Times New Roman",
+          "serif",
+        ],
         mono: [
           "ui-monospace",
           "SFMono-Regular",
@@ -58,6 +68,13 @@ export default {
           "Consolas",
           "monospace",
         ],
+      },
+      letterSpacing: {
+        tighter: "-0.04em",
+        tight: "-0.02em",
+        wide: "0.03em",
+        wider: "0.08em",
+        widest: "0.14em",
       },
     },
   },

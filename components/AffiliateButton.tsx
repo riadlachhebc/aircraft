@@ -24,22 +24,22 @@ export function AffiliateButton({
       href={`/go/${slug}`}
       target="_blank"
       rel="sponsored nofollow noopener noreferrer"
-      className={`inline-flex items-center justify-between gap-3 rounded-lg px-4 py-2.5 text-sm font-semibold transition shadow-sm ${
+      className={`inline-flex items-center justify-between gap-3 px-4 py-2 text-xs font-bold uppercase tracking-wider transition ${
         isPrimary
-          ? "bg-forest-800 text-white hover:bg-forest-900 focus-visible:ring-forest-800"
-          : "border border-stone-300 bg-white text-stone-800 hover:bg-stone-50 hover:border-stone-400"
+          ? "bg-forest-800 text-white hover:bg-black"
+          : "border border-stone-300 bg-white text-stone-900 hover:border-black"
       } ${className}`}
       aria-label={`Check price and availability for ${productName} on ${merchant} (opens retailer website)`}
     >
       <span className="flex items-center gap-1.5">
         <span>Check Price on {merchant}</span>
         {price !== undefined && (
-          <span className="text-xs font-normal opacity-90">
+          <span className="font-mono text-[11px] opacity-90">
             (~${price})
           </span>
         )}
       </span>
-      <ExternalLink className="h-4 w-4 shrink-0 opacity-75" aria-hidden="true" />
+      <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-75" aria-hidden="true" />
     </a>
   );
 }

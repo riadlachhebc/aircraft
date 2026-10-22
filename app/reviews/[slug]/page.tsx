@@ -17,9 +17,7 @@ import {
   Check,
   X,
   ExternalLink,
-  Layers,
   Wrench,
-  DollarSign,
   AlertCircle,
 } from "lucide-react";
 
@@ -112,7 +110,7 @@ export default async function ProductDetailPage({
   ];
 
   return (
-    <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-6 space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -125,42 +123,41 @@ export default async function ProductDetailPage({
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Header */}
-      <header className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-10 shadow-sm space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-8 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+            <span className="bg-black text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
               {product.manufacturer}
             </span>
-            <span className="text-stone-300">&middot;</span>
-            <span className="text-xs font-mono text-stone-500">
-              Model {product.modelNumber}
+            <span className="font-mono text-xs text-stone-600 font-bold">
+              MODEL {product.modelNumber}
             </span>
-            <span className="inline-flex items-center gap-1 rounded bg-stone-100 px-2 py-0.5 text-[10px] font-medium text-stone-700">
-              <ShieldCheck className="h-3.5 w-3.5 text-forest-700" />
+            <span className="inline-flex items-center gap-1 border border-stone-300 bg-white px-2 py-0.5 text-[10px] font-bold text-stone-800 uppercase tracking-wider">
+              <ShieldCheck className="h-3 w-3 text-forest-700" />
               Verified Spec Sheet
             </span>
           </div>
 
           <div className="text-right">
-            <div className="text-3xl font-serif font-bold text-stone-900">
+            <div className="text-3xl font-black font-sans text-black">
               ${product.approximateUsdPrice}
             </div>
-            <div className="text-[11px] text-stone-500">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
               Verified {product.priceVerifiedDate}
             </div>
           </div>
         </div>
 
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+        <h1 className="font-sans font-black text-2xl sm:text-4xl uppercase tracking-tight text-black">
           {product.name}
         </h1>
 
-        <p className="text-base text-stone-600 leading-relaxed max-w-2xl">
+        <p className="text-sm sm:text-base text-stone-700 leading-relaxed max-w-2xl font-normal">
           {product.bestFor}
         </p>
 
         {/* Action Button */}
-        <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-stone-100">
+        <div className="pt-3 flex flex-wrap items-center gap-3 border-t border-stone-200">
           {product.affiliateSlug ? (
             <AffiliateButton
               slug={product.affiliateSlug}
@@ -172,10 +169,10 @@ export default async function ProductDetailPage({
               href={product.officialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-forest-800 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-forest-900 transition"
+              className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-stone-800 transition"
             >
               <span>Visit Official Manufacturer Site</span>
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-3.5 w-3.5" />
             </a>
           )}
 
@@ -183,7 +180,7 @@ export default async function ProductDetailPage({
             href={product.officialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-stone-600 hover:text-stone-900 underline flex items-center gap-1"
+            className="text-xs font-bold uppercase tracking-wider text-stone-600 hover:text-black underline flex items-center gap-1"
           >
             <span>Official Documentation</span>
             <ExternalLink className="h-3 w-3" />
@@ -194,13 +191,13 @@ export default async function ProductDetailPage({
       <AffiliateNotice />
 
       {/* Pros & Cons */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-forest-900 flex items-center gap-2">
-            <Check className="h-5 w-5 text-forest-700" />
-            Engineering Advantages
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-xs uppercase tracking-wider text-forest-800 flex items-center gap-1.5 border-b border-stone-100 pb-2">
+            <Check className="h-4 w-4 text-forest-700" />
+            <span>Engineering Strengths</span>
           </h2>
-          <ul className="space-y-2 text-sm text-stone-700">
+          <ul className="space-y-1.5 text-xs text-stone-800">
             {product.pros.map((pro, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-forest-700 font-bold">&bull;</span>
@@ -210,15 +207,15 @@ export default async function ProductDetailPage({
           </ul>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-3">
-          <h2 className="font-serif font-bold text-lg text-amber-950 flex items-center gap-2">
-            <X className="h-5 w-5 text-amber-700" />
-            Documented Trade-Offs & Limitations
+        <div className="border border-stone-200 bg-white p-5 space-y-2">
+          <h2 className="font-sans font-black text-xs uppercase tracking-wider text-stone-700 flex items-center gap-1.5 border-b border-stone-100 pb-2">
+            <X className="h-4 w-4 text-stone-500" />
+            <span>Documented Limitations</span>
           </h2>
-          <ul className="space-y-2 text-sm text-stone-700">
+          <ul className="space-y-1.5 text-xs text-stone-800">
             {product.cons.map((con, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-amber-700 font-bold">&bull;</span>
+                <span className="text-stone-400 font-bold">&bull;</span>
                 <span>{con}</span>
               </li>
             ))}
@@ -227,10 +224,10 @@ export default async function ProductDetailPage({
       </section>
 
       {/* Complete Technical Specifications Table */}
-      <section className="space-y-4">
+      <section className="space-y-3">
         <div className="flex items-center gap-2">
-          <Wrench className="h-5 w-5 text-forest-800" />
-          <h2 className="font-serif text-2xl font-bold text-stone-900">
+          <Wrench className="h-4 w-4 text-forest-800" />
+          <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
             Technical Specification Matrix
           </h2>
         </div>
@@ -243,26 +240,26 @@ export default async function ProductDetailPage({
       </section>
 
       {/* Editorial Limitations & Evaluation Basis */}
-      <section className="rounded-xl border border-stone-200 bg-stone-50/70 p-6 shadow-sm space-y-2">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-700 flex items-center gap-1.5">
+      <section className="border border-stone-200 bg-stone-50 p-5 space-y-1.5">
+        <h3 className="text-xs font-black uppercase tracking-wider text-stone-700 flex items-center gap-1.5">
           <AlertCircle className="h-4 w-4 text-stone-500" />
-          Evaluation Methodology & Evidence Basis
+          <span>Evaluation Methodology & Evidence Basis</span>
         </h3>
-        <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+        <p className="text-xs text-stone-600 leading-relaxed">
           {product.editorialLimitations}
         </p>
       </section>
 
       {/* Back to Category Link */}
-      <div className="border-t border-stone-200 pt-6 flex items-center justify-between text-xs">
+      <div className="border-t border-stone-200 pt-5 flex items-center justify-between text-xs font-bold uppercase tracking-wider">
         <Link
           href={`/${product.categoryId}`}
-          className="font-semibold text-forest-800 hover:underline"
+          className="text-forest-800 hover:text-black"
         >
-          &larr; Return to {category?.name} Category
+          &larr; Return to {category?.name}
         </Link>
-        <Link href="/reviews" className="text-stone-500 hover:text-stone-800">
-          Browse All Product Reviews
+        <Link href="/reviews" className="text-stone-500 hover:text-black">
+          Browse All Reviews
         </Link>
       </div>
     </article>

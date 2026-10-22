@@ -19,29 +19,26 @@ export default function BuyingGuidesIndexPage() {
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Breadcrumbs items={breadcrumbs} />
 
-      <header className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-12 shadow-sm">
-        <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3 py-1 text-xs font-semibold text-forest-800">
-            <BookOpen className="h-3.5 w-3.5 text-forest-700" />
-            Editorial Knowledge Base
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
-            Home Comfort & Climate Buying Guides
-          </h1>
-          <p className="text-base text-stone-600 leading-relaxed">
-            Every guide is authored by building science and HVAC specialists.
-            We use Department of Energy (DOE) test procedures, Association of
-            Home Appliance Manufacturers (AHAM) CADR standards, and real-world
-            utility rate modeling.
-          </p>
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-10 space-y-2">
+        <div className="inline-flex items-center gap-1.5 bg-black text-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider">
+          <BookOpen className="h-3 w-3" />
+          <span>Complete Research Library</span>
         </div>
+        <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-black">
+          Home Comfort & Climate Buying Guides
+        </h1>
+        <p className="text-sm text-stone-700 leading-relaxed max-w-2xl">
+          Every guide is authored by building science and HVAC specialists using
+          Department of Energy (DOE) test procedures, AHAM CADR protocols, and
+          reproducible utility rate calculations.
+        </p>
       </header>
 
       <section>

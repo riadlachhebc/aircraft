@@ -11,46 +11,46 @@ export function Logo({ className = "", variant = "dark" }: LogoProps) {
   return (
     <Link
       href="/"
-      className={`inline-flex items-center gap-2.5 font-serif font-bold tracking-tight transition-opacity hover:opacity-90 ${className}`}
+      className={`inline-flex items-center gap-3 transition-opacity hover:opacity-90 ${className}`}
       aria-label="Air Crafted Home - Home Page"
     >
-      {/* Airflow Vortex Emblem */}
+      {/* Editorial Geometric Emblem */}
       <div
-        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-          isLight ? "bg-forest-600 text-white" : "bg-forest-700 text-emerald-100"
-        } shadow-sm`}
+        className={`flex h-8 w-8 shrink-0 items-center justify-center font-black text-sm tracking-tighter ${
+          isLight
+            ? "bg-forest-600 text-white"
+            : "bg-black text-white"
+        }`}
         aria-hidden="true"
       >
-        <svg
-          className="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          {/* Stylized airflow vortex streamlines */}
-          <path d="M4 8h12a4 4 0 1 0-4-4" />
-          <path d="M2 14h16a3 3 0 1 0-3-3" />
-          <path d="M6 20h10a2 2 0 1 0-2-2" />
-        </svg>
+        <span>AC</span>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col leading-none">
+        <div className="flex items-center gap-1.5">
+          <span
+            className={`text-xl font-black tracking-tighter uppercase font-sans ${
+              isLight ? "text-white" : "text-black"
+            }`}
+          >
+            AIR CRAFTED
+          </span>
+          <span
+            className={`text-xs font-bold uppercase tracking-wider px-1 py-0.5 ${
+              isLight
+                ? "bg-stone-800 text-stone-300"
+                : "bg-forest-700 text-white"
+            }`}
+          >
+            HOME
+          </span>
+        </div>
         <span
-          className={`text-lg leading-tight font-serif ${
-            isLight ? "text-white" : "text-slate-900"
+          className={`text-[9.5px] font-bold tracking-widest uppercase mt-0.5 ${
+            isLight ? "text-stone-400" : "text-stone-500"
           }`}
         >
-          Air Crafted Home
-        </span>
-        <span
-          className={`text-[10px] tracking-wider uppercase font-sans font-medium ${
-            isLight ? "text-emerald-200" : "text-emerald-800"
-          }`}
-        >
-          Climate & Comfort Engineering
+          INDOOR CLIMATE & GEAR LAB
         </span>
       </div>
     </Link>

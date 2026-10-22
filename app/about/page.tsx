@@ -17,18 +17,18 @@ export default function AboutPage() {
   const breadcrumbs = [{ name: "About Us", href: "/about" }];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-6 space-y-10">
       <Breadcrumbs items={breadcrumbs} />
 
-      <header className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-12 shadow-sm space-y-4">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3 py-1 text-xs font-semibold text-forest-800">
-          <Target className="h-3.5 w-3.5 text-forest-700" />
-          Our Mission
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-10 space-y-3">
+        <div className="inline-flex items-center gap-1.5 bg-black text-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider">
+          <Target className="h-3 w-3" />
+          <span>Our Mission</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+        <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-black">
           Engineering the Perfect Indoor Climate
         </h1>
-        <p className="text-base sm:text-lg text-stone-600 leading-relaxed">
+        <p className="text-sm sm:text-base text-stone-700 leading-relaxed font-normal">
           Air Crafted Home was founded on a simple premise: consumer home-comfort
           appliances are too often marketed with exaggerated cooling ratings,
           misleading noise claims, and obscure energy estimates. We exist to bring
@@ -38,15 +38,15 @@ export default function AboutPage() {
       </header>
 
       {/* Core Principles */}
-      <section className="space-y-6">
-        <h2 className="font-serif text-2xl font-bold text-stone-900">
-          Our Guiding Principles
-        </h2>
+      <section className="space-y-4">
+        <div className="editorial-section-header">
+          <h2 className="editorial-section-title">Our Guiding Principles</h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-2">
-            <ShieldCheck className="h-6 w-6 text-forest-700" />
-            <h3 className="font-serif font-bold text-base text-stone-900">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="border border-stone-200 bg-white p-5 space-y-2">
+            <ShieldCheck className="h-5 w-5 text-forest-700" />
+            <h3 className="font-sans font-bold text-sm uppercase tracking-wider text-black">
               Evidence Over Hype
             </h3>
             <p className="text-xs text-stone-600 leading-relaxed">
@@ -55,9 +55,9 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-2">
-            <HeartHandshake className="h-6 w-6 text-forest-700" />
-            <h3 className="font-serif font-bold text-base text-stone-900">
+          <div className="border border-stone-200 bg-white p-5 space-y-2">
+            <HeartHandshake className="h-5 w-5 text-forest-700" />
+            <h3 className="font-sans font-bold text-sm uppercase tracking-wider text-black">
               Editorial Independence
             </h3>
             <p className="text-xs text-stone-600 leading-relaxed">
@@ -66,9 +66,9 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-2">
-            <Award className="h-6 w-6 text-forest-700" />
-            <h3 className="font-serif font-bold text-base text-stone-900">
+          <div className="border border-stone-200 bg-white p-5 space-y-2">
+            <Award className="h-5 w-5 text-forest-700" />
+            <h3 className="font-sans font-bold text-sm uppercase tracking-wider text-black">
               Transparent Math
             </h3>
             <p className="text-xs text-stone-600 leading-relaxed">
@@ -80,63 +80,43 @@ export default function AboutPage() {
       </section>
 
       {/* Editorial Team */}
-      <section className="space-y-6">
-        <div className="border-b border-stone-200 pb-4">
-          <h2 className="font-serif text-2xl font-bold text-stone-900">
-            Our Editorial & Research Team
-          </h2>
-          <p className="text-xs text-stone-500 mt-1">
-            Meet the engineers, environmental specialists, and energy analysts
-            behind our guides.
-          </p>
+      <section className="space-y-4">
+        <div className="editorial-section-header">
+          <h2 className="editorial-section-title">Our Editorial & Research Team</h2>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {AUTHOR_LIST.map((author) => (
             <div
               key={author.id}
               id={author.id}
-              className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm flex flex-col sm:flex-row gap-5 items-start"
+              className="border border-stone-300 bg-white p-5 flex flex-col sm:flex-row gap-4 items-start"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={author.avatarUrl}
                 alt={author.name}
-                className="h-20 w-20 rounded-full object-cover border border-stone-200 shrink-0"
+                className="h-16 w-16 rounded-full object-cover border-2 border-black shrink-0"
               />
-              <div className="space-y-1.5 flex-1">
+              <div className="space-y-1 flex-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="font-serif font-bold text-lg text-stone-900">
+                  <h3 className="font-sans font-black text-base uppercase text-black">
                     {author.name}
                   </h3>
-                  <span className="text-xs font-semibold text-forest-800 bg-forest-50 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-forest-800 bg-forest-50 px-2 py-0.5 border border-forest-200">
                     {author.experienceYears}+ Years Experience
                   </span>
                 </div>
-                <div className="text-xs font-medium text-stone-500">
+                <div className="text-xs font-bold text-stone-500 uppercase tracking-wider">
                   {author.role} &middot; {author.credentials}
                 </div>
-                <p className="text-xs text-stone-600 leading-relaxed pt-2">
+                <p className="text-xs text-stone-600 leading-relaxed pt-1">
                   {author.bio}
                 </p>
               </div>
             </div>
           ))}
         </div>
-      </section>
-
-      {/* US Residential Focus */}
-      <section className="rounded-xl border border-stone-200 bg-stone-50/70 p-6 text-xs text-stone-600 leading-relaxed space-y-2">
-        <h3 className="font-serif font-bold text-sm text-stone-900">
-          Geographic and Technical Scope
-        </h3>
-        <p>
-          Air Crafted Home is engineered specifically for the <strong>United States residential market</strong>.
-          All electrical advice assumes 120-volt, 60-hertz branch circuits (15A or 20A breakers).
-          Cooling capacities are expressed in US customary BTUs and DOE SACC ratings; room sizes
-          are calculated in square feet; and utility costs reflect current US Energy Information
-          Administration (EIA) state-by-state tariffs.
-        </p>
       </section>
     </div>
   );

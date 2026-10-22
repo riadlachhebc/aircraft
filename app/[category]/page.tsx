@@ -68,7 +68,7 @@ export default async function CategoryPage({
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -77,26 +77,26 @@ export default async function CategoryPage({
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Category Hero */}
-      <section className="rounded-2xl border border-stone-200/90 bg-white p-8 sm:p-12 shadow-sm">
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3 py-1 text-xs font-semibold text-forest-800">
-            <Layers className="h-3.5 w-3.5 text-forest-700" aria-hidden="true" />
-            Category Pillar
+      <section className="border-2 border-black bg-stone-50 p-6 sm:p-10 space-y-4">
+        <div className="max-w-3xl space-y-3">
+          <div className="inline-flex items-center gap-1.5 bg-forest-800 text-white px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider">
+            <Layers className="h-3 w-3" aria-hidden="true" />
+            <span>Category Pillar Hub</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+          <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-black">
             {category.heroHeadline}
           </h1>
-          <p className="text-base text-stone-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-stone-700 leading-relaxed font-normal">
             {category.editorialSummary}
           </p>
 
           {/* Key Topics & Standards */}
-          <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-stone-100 text-xs">
+          <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-stone-300 text-xs">
             <div>
-              <span className="font-semibold text-stone-900 block mb-1">
-                Core Topics Explored:
+              <span className="font-bold uppercase tracking-wider text-black block mb-1.5 text-[11px]">
+                Core Topics & Physics Explored:
               </span>
-              <ul className="space-y-1 text-stone-600">
+              <ul className="space-y-1 text-stone-700">
                 {category.keyTopics.map((topic, i) => (
                   <li key={i} className="flex items-center gap-1.5">
                     <span className="text-forest-700 font-bold">&bull;</span>
@@ -107,10 +107,10 @@ export default async function CategoryPage({
             </div>
 
             <div>
-              <span className="font-semibold text-stone-900 block mb-1">
+              <span className="font-bold uppercase tracking-wider text-black block mb-1.5 text-[11px]">
                 Referenced US Standards Bodies:
               </span>
-              <ul className="space-y-1 text-stone-600">
+              <ul className="space-y-1 text-stone-700">
                 {category.standardsBodies.map((std, i) => (
                   <li key={i} className="flex items-center gap-1.5">
                     <ShieldCheck className="h-3.5 w-3.5 text-forest-700 shrink-0" />
@@ -127,14 +127,11 @@ export default async function CategoryPage({
       {category.id === "energy-efficiency" && <CalculatorWidget />}
 
       {/* Articles in Category */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-          <div className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-forest-800" />
-            <h2 className="font-serif text-2xl font-bold text-stone-900">
-              Editorial Buying Guides & Research ({categoryArticles.length})
-            </h2>
-          </div>
+      <section className="space-y-4">
+        <div className="editorial-section-header">
+          <h2 className="editorial-section-title">
+            Editorial Buying Guides & Research ({categoryArticles.length})
+          </h2>
         </div>
 
         {categoryArticles.length > 0 ? (
@@ -144,7 +141,7 @@ export default async function CategoryPage({
             ))}
           </div>
         ) : (
-          <p className="text-sm text-stone-500 py-6">
+          <p className="text-xs text-stone-500 py-6">
             New research guides are currently undergoing peer review for this category.
           </p>
         )}
@@ -152,17 +149,14 @@ export default async function CategoryPage({
 
       {/* Products in Category */}
       {categoryProducts.length > 0 && (
-        <section className="space-y-6 pt-6">
-          <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-forest-800" />
-              <h2 className="font-serif text-2xl font-bold text-stone-900">
-                Verified Product Specifications & Reviews ({categoryProducts.length})
-              </h2>
-            </div>
+        <section className="space-y-4 pt-4">
+          <div className="editorial-section-header">
+            <h2 className="editorial-section-title">
+              Verified Product Specifications & Reviews ({categoryProducts.length})
+            </h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {categoryProducts.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}

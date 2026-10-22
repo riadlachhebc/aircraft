@@ -20,7 +20,6 @@ import {
   Calendar,
   CheckCircle2,
   AlertCircle,
-  ExternalLink,
   BookOpen,
   HelpCircle,
   ShieldCheck,
@@ -108,7 +107,7 @@ export default async function ArticleDetailPage({
     .filter(Boolean);
 
   return (
-    <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-6 space-y-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -121,54 +120,56 @@ export default async function ArticleDetailPage({
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Article Header */}
-      <header className="space-y-4 border-b border-stone-200 pb-8">
+      <header className="space-y-3 border-b-2 border-black pb-6">
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href={`/${article.categoryId}`}
-            className="rounded-md bg-forest-50 px-2.5 py-1 text-xs font-semibold text-forest-800 hover:bg-forest-100 transition"
+            className="bg-forest-800 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5"
           >
             {category?.name}
           </Link>
-          <span className="text-stone-300">&middot;</span>
-          <span className="flex items-center gap-1 text-xs text-stone-500">
-            <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-            {article.readTimeMinutes} min read
+          <span className="text-stone-300">&bull;</span>
+          <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-stone-500">
+            <Clock className="h-3 w-3" aria-hidden="true" />
+            {article.readTimeMinutes} MIN READ
           </span>
-          <span className="text-stone-300">&middot;</span>
-          <span className="flex items-center gap-1 text-xs text-stone-500">
-            <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
-            Updated {article.updatedAt}
+          <span className="text-stone-300">&bull;</span>
+          <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-stone-500">
+            <Calendar className="h-3 w-3" aria-hidden="true" />
+            UPDATED {article.updatedAt}
           </span>
         </div>
 
-        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-900 leading-[1.2]">
+        <h1 className="font-sans font-black text-2xl sm:text-4xl lg:text-5xl tracking-tight text-black leading-[1.12]">
           {article.title}
         </h1>
 
-        <p className="text-base sm:text-lg text-stone-600 leading-relaxed">
+        <p className="text-base sm:text-lg text-stone-700 leading-relaxed font-normal">
           {article.metaDescription}
         </p>
 
         {/* Author Byline & Peer Reviewer */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-stone-100 text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-stone-200 text-xs">
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={author.avatarUrl}
               alt={author.name}
-              className="h-10 w-10 rounded-full object-cover border border-stone-200"
+              className="h-10 w-10 rounded-full object-cover border border-black"
             />
             <div>
-              <div className="font-semibold text-stone-900">{author.name}</div>
-              <div className="text-stone-500">{author.role}</div>
+              <div className="font-bold text-black uppercase tracking-wider text-[11px]">
+                By {author.name}
+              </div>
+              <div className="text-stone-500 text-[11px]">{author.role}</div>
             </div>
           </div>
 
           {reviewer && (
-            <div className="flex items-center gap-2 text-stone-500 bg-stone-50 px-3 py-1.5 rounded-lg border border-stone-200/80">
-              <ShieldCheck className="h-4 w-4 text-forest-700" />
+            <div className="flex items-center gap-1.5 text-stone-700 bg-stone-100 px-3 py-1.5 border border-stone-200 text-[11px] font-semibold">
+              <ShieldCheck className="h-3.5 w-3.5 text-forest-700" />
               <span>
-                Peer-reviewed by <strong>{reviewer.name}</strong> ({reviewer.role})
+                Peer-reviewed by <strong>{reviewer.name}</strong>
               </span>
             </div>
           )}
@@ -176,14 +177,14 @@ export default async function ArticleDetailPage({
       </header>
 
       {/* Hero Image */}
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-stone-200 shadow-sm bg-stone-100">
+      <div className="relative aspect-video w-full overflow-hidden border border-black bg-stone-100">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={article.heroImage}
           alt={article.heroImageAlt}
           className="h-full w-full object-cover"
         />
-        <div className="absolute bottom-2 right-3 rounded bg-stone-900/70 px-2 py-0.5 text-[10px] text-stone-200 backdrop-blur-sm">
+        <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-0.5 text-[10px] font-mono text-white">
           {article.heroImageAlt}
         </div>
       </div>
@@ -195,24 +196,24 @@ export default async function ArticleDetailPage({
       <section
         role="region"
         aria-label="Direct Answer Summary"
-        className="rounded-xl border-l-4 border-forest-700 bg-forest-50/50 p-5 sm:p-6 shadow-sm"
+        className="border-l-4 border-black bg-stone-50 p-5 sm:p-6"
       >
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-forest-900 mb-2">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-forest-800 mb-1.5">
           <BookOpen className="h-4 w-4 text-forest-700" aria-hidden="true" />
-          Direct Technical Answer
+          <span>The Bottom Line / Direct Engineering Answer</span>
         </div>
-        <p className="text-base sm:text-lg font-serif font-medium text-stone-900 leading-relaxed">
+        <p className="text-base sm:text-lg font-sans font-bold text-black leading-relaxed">
           {article.directAnswer}
         </p>
       </section>
 
       {/* Key Takeaways */}
-      <section className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-stone-900 flex items-center gap-2 mb-4">
+      <section className="border border-stone-200 bg-white p-5">
+        <h2 className="text-xs font-black uppercase tracking-wider text-black flex items-center gap-2 mb-3 border-b border-stone-100 pb-2">
           <CheckCircle2 className="h-4 w-4 text-forest-700" aria-hidden="true" />
-          Core Engineering Takeaways
+          <span>Core Takeaways</span>
         </h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-stone-700">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs sm:text-sm text-stone-800">
           {article.keyTakeaways.map((takeaway, i) => (
             <li key={i} className="flex items-start gap-2">
               <span className="text-forest-700 font-bold mt-0.5">&bull;</span>
@@ -224,8 +225,8 @@ export default async function ArticleDetailPage({
 
       {/* Comparison Table if Present */}
       {article.comparisonTable && (
-        <section className="space-y-3">
-          <h2 className="font-serif text-2xl font-bold text-stone-900">
+        <section className="space-y-2">
+          <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
             Comparative Performance Analysis
           </h2>
           <ResponsiveTable
@@ -248,13 +249,13 @@ export default async function ArticleDetailPage({
       )}
 
       {/* Content Sections */}
-      <div className="prose prose-stone max-w-none space-y-8 text-stone-800 leading-relaxed">
+      <div className="space-y-8 text-stone-900 leading-relaxed">
         {article.contentSections.map((sec, idx) => (
-          <section key={idx} className="space-y-4">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 border-b border-stone-100 pb-2">
+          <section key={idx} className="space-y-3">
+            <h2 className="font-sans font-black text-xl sm:text-2xl uppercase tracking-tight text-black border-b border-stone-200 pb-2">
               {sec.heading}
             </h2>
-            <div className="text-base space-y-4 text-stone-700 whitespace-pre-line leading-relaxed">
+            <div className="text-sm sm:text-base space-y-4 text-stone-700 whitespace-pre-line leading-relaxed">
               {sec.bodyMarkdown}
             </div>
           </section>
@@ -262,12 +263,12 @@ export default async function ArticleDetailPage({
       </div>
 
       {/* Scientific Limitations & Exceptions */}
-      <section className="rounded-xl border border-amber-200 bg-amber-50/40 p-6 shadow-sm space-y-3">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-amber-950 flex items-center gap-2">
+      <section className="border border-amber-300 bg-amber-50/50 p-5 space-y-2">
+        <h2 className="text-xs font-black uppercase tracking-wider text-amber-900 flex items-center gap-2">
           <AlertCircle className="h-4 w-4 text-amber-700" aria-hidden="true" />
-          Technical Assumptions & Boundary Conditions
+          <span>Technical Assumptions & Boundary Conditions</span>
         </h2>
-        <ul className="space-y-2 text-xs sm:text-sm text-amber-900">
+        <ul className="space-y-1.5 text-xs text-amber-900">
           {article.limitations.map((lim, i) => (
             <li key={i} className="flex items-start gap-2">
               <span className="text-amber-700 font-bold">&bull;</span>
@@ -279,11 +280,11 @@ export default async function ArticleDetailPage({
 
       {/* Product Reference Cards if Linked */}
       {relatedProducts.length > 0 && (
-        <section className="space-y-4 pt-4">
-          <h2 className="font-serif text-2xl font-bold text-stone-900">
+        <section className="space-y-4 pt-4 border-t-2 border-black">
+          <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
             Referenced Equipment & Specification Sheets
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {relatedProducts.map((prod) => (
               <ProductCard key={prod.slug} product={prod} />
             ))}
@@ -292,12 +293,12 @@ export default async function ArticleDetailPage({
       )}
 
       {/* Primary Sources & Citations */}
-      <section className="rounded-xl border border-stone-200 bg-stone-50/70 p-6 shadow-sm space-y-3">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-600 flex items-center gap-2">
+      <section className="border border-stone-200 bg-stone-50 p-5 space-y-2">
+        <h2 className="text-xs font-black uppercase tracking-wider text-stone-700 flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-stone-500" aria-hidden="true" />
-          Primary Sources & Authoritative References
+          <span>Primary Sources & Regulatory References</span>
         </h2>
-        <ul className="space-y-2 text-xs text-stone-600">
+        <ul className="space-y-1.5 text-xs text-stone-600">
           {article.sources.map((src, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <span className="font-mono text-stone-400">[{idx + 1}]</span>
@@ -306,7 +307,7 @@ export default async function ArticleDetailPage({
                   href={src.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-stone-900 underline hover:text-forest-800"
+                  className="font-bold text-black underline hover:text-forest-800"
                 >
                   {src.title}
                 </a>{" "}
@@ -322,21 +323,21 @@ export default async function ArticleDetailPage({
 
       {/* Frequently Asked Questions */}
       {article.faqs && article.faqs.length > 0 && (
-        <section className="space-y-4 border-t border-stone-200 pt-8">
-          <h2 className="font-serif text-2xl font-bold text-stone-900 flex items-center gap-2">
+        <section className="space-y-4 border-t border-stone-200 pt-6">
+          <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black flex items-center gap-2">
             <HelpCircle className="h-5 w-5 text-forest-700" />
-            Frequently Asked Questions
+            <span>Frequently Asked Questions</span>
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {article.faqs.map((faq, i) => (
               <div
                 key={i}
-                className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+                className="border border-stone-200 bg-white p-4"
               >
-                <h3 className="font-serif font-bold text-base text-stone-900 mb-2">
+                <h3 className="font-sans font-bold text-sm text-black mb-1">
                   {faq.question}
                 </h3>
-                <p className="text-sm text-stone-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
@@ -346,19 +347,19 @@ export default async function ArticleDetailPage({
       )}
 
       {/* Author Biography Box */}
-      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+      <section className="border-2 border-black bg-stone-50 p-5 sm:p-6">
         <div className="flex flex-col sm:flex-row items-start gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={author.avatarUrl}
             alt={author.name}
-            className="h-16 w-16 rounded-full object-cover border border-stone-200 shrink-0"
+            className="h-16 w-16 rounded-full object-cover border-2 border-black shrink-0"
           />
           <div className="space-y-1">
-            <div className="font-serif text-lg font-bold text-stone-900">
+            <div className="font-sans font-black text-base uppercase text-black">
               Written by {author.name}
             </div>
-            <div className="text-xs font-medium text-forest-800">
+            <div className="text-xs font-bold uppercase tracking-wider text-forest-800">
               {author.role} &middot; {author.credentials}
             </div>
             <p className="text-xs text-stone-600 leading-relaxed pt-1">
@@ -370,11 +371,11 @@ export default async function ArticleDetailPage({
 
       {/* Related Articles */}
       {relatedArticles.length > 0 && (
-        <section className="space-y-4 border-t border-stone-200 pt-8">
-          <h2 className="font-serif text-2xl font-bold text-stone-900">
+        <section className="space-y-4 border-t-2 border-black pt-6">
+          <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
             Related Climate & Comfort Guides
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {relatedArticles.map((rel) => (
               <ArticleCard key={rel.slug} article={rel} />
             ))}
