@@ -29,10 +29,10 @@ import { CATEGORIES } from "../data/categories.ts";
 import { DEFAULT_AUTHOR } from "../data/authors.ts";
 
 test("Production Article Registry: Published Lasko review is accessible and validated", () => {
-  // Published articles count is 1
+  // Published articles count is 2
   const publishedArticles = getPublishedArticles();
-  assert.equal(publishedArticles.length, 1, "getPublishedArticles must return 1 published article");
-  assert.equal(getPublishedArticlesByCategory("heating").length, 1);
+  assert.equal(publishedArticles.length, 2, "getPublishedArticles must return 2 published articles");
+  assert.equal(getPublishedArticlesByCategory("heating").length, 2);
   assert.equal(getPublishedArticlesByCategory("air-conditioners").length, 0);
 
   // Published article resolves correctly by slug
@@ -41,6 +41,13 @@ test("Production Article Registry: Published Lasko review is accessible and vali
   assert.equal(publishedArticle?.status, "published");
   assert.equal(publishedArticle?.articleType, "review");
   assert.equal(validateArticleRecord(publishedArticle).isValid, true, "Published article must pass editorial validation");
+
+  // Published space heater decision guide resolves correctly by slug
+  const publishedGuide = getPublishedArticleBySlug("space-heater-vs-central-heating");
+  assert.ok(publishedGuide, "Published space heater guide must exist in registry");
+  assert.equal(publishedGuide?.status, "published");
+  assert.equal(publishedGuide?.articleType, "problem-solver");
+  assert.equal(validateArticleRecord(publishedGuide).isValid, true, "Published guide must pass editorial validation");
 
   // Published product resolves correctly by ID and slug
   const publishedProduct = getPublishedProductById("lasko-duo-comfort-38-dc-fhv830");

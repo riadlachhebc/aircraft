@@ -524,7 +524,7 @@ Readers interested in current availability and purchasing options can [view the 
     relatedProductSlugs: ["lasko-duo-comfort-38-dc-fhv830"],
     categoryId: "heating",
     authorId: "editorial-team",
-    status: "draft",
+    status: "published",
     publishedAt: "2026-10-23",
     updatedAt: "2026-10-23",
     readTimeMinutes: 9,
