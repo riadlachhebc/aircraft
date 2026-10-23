@@ -10,6 +10,9 @@ import {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.domain),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: `${SITE_CONFIG.name} — Evidence-Based Home Climate & Indoor Comfort`,
     template: `%s | ${SITE_CONFIG.name}`,

@@ -1,44 +1,94 @@
 import Link from "next/link";
 import { Product } from "@/lib/types";
+import { getPublishedProductById, getPublishedProductBySlug } from "@/data/products";
 import { AffiliateButton } from "./AffiliateButton";
-import { Check, X, ShieldCheck, Gauge, Volume2, Home, Zap } from "lucide-react";
+import { SafeImage } from "./SafeImage";
+import { Check, X, ShieldCheck, Gauge, Volume2, Home, Zap, ExternalLink } from "lucide-react";
+
+export interface ProductCardProps {
+  product?: Product;
+  productId?: string;
+  slug?: string;
+}
 
 export function ProductCard({
-  product,
-}: {
-  product: Product;
-}) {
+  product: directProduct,
+  productId,
+  slug,
+}: ProductCardProps) {
+  const product =
+    directProduct && directProduct.status === "published"
+      ? directProduct
+      : productId
+      ? getPublishedProductById(productId)
+      : slug
+      ? getPublishedProductBySlug(slug)
+      : undefined;
+
+  // Never render unverified or draft products in public components
+  if (!product || product.status !== "published") {
+    return null;
+  }
+
+  const evidenceLabel =
+    product.evidenceType === "independent-consensus"
+      ? "Consensus Standard Verified"
+      : product.evidenceType === "manufacturer-spec"
+      ? "Nameplate Audited"
+      : product.evidenceType === "energy-calc"
+      ? "Thermodynamic Model"
+      : "Editorial Audit";
+
+  const capacityDisplay = product.coolingCapacityBtuSacc
+    ? `${product.coolingCapacityBtuSacc.toLocaleString()} BTU (SACC)`
+    : product.heatingCapacityWatts
+    ? `${product.heatingCapacityWatts}W (${Math.round(product.heatingCapacityWatts * 3.412)} BTU)`
+    : product.cadrSmoke
+    ? `CADR ${product.cadrSmoke} Smoke`
+    : product.airFlowCfm
+    ? `${product.airFlowCfm.toLocaleString()} CFM`
+    : "High Velocity Circulation";
+
   return (
     <article className="border border-stone-200 bg-white p-5 hover:border-black transition duration-200">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-stone-100 pb-3.5">
-        <div>
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="bg-stone-900 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
-              {product.manufacturer}
-            </span>
-            <span className="font-mono text-xs text-stone-500 font-semibold">
-              SKU: {product.modelNumber}
-            </span>
-            <span className="inline-flex items-center gap-1 border border-stone-200 bg-stone-50 px-2 py-0.5 text-[10px] font-bold text-stone-700 uppercase tracking-wider">
-              <ShieldCheck className="h-3 w-3 text-forest-700" aria-hidden="true" />
-              {product.evidenceType === "independent-consensus"
-                ? "AHAM Verified"
-                : "DOE Standard Verified"}
-            </span>
-          </div>
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-stone-100 pb-3.5">
+        <div className="flex items-start gap-4">
+          {product.imageUrl && (
+            <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 border border-stone-200 overflow-hidden bg-white shadow-sm">
+              <SafeImage
+                src={product.imageUrl}
+                alt={product.imageAlt || product.name}
+                categoryId={product.categoryId}
+              />
+            </div>
+          )}
+          <div>
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="bg-stone-900 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
+                {product.brand || product.manufacturer}
+              </span>
+              <span className="font-mono text-xs text-stone-500 font-semibold">
+                SKU: {product.modelNumber}
+              </span>
+              <span className="inline-flex items-center gap-1 border border-stone-200 bg-stone-50 px-2 py-0.5 text-[10px] font-bold text-stone-700 uppercase tracking-wider">
+                <ShieldCheck className="h-3 w-3 text-forest-700" aria-hidden="true" />
+                {evidenceLabel}
+              </span>
+            </div>
 
-          <h3 className="text-lg sm:text-xl font-sans font-bold text-stone-900 tracking-tight">
-            <Link
-              href={`/reviews/${product.slug}`}
-              className="hover:text-forest-800 transition-colors"
-            >
-              {product.name}
-            </Link>
-          </h3>
-          <p className="text-xs text-stone-600 mt-0.5 max-w-xl">
-            {product.bestFor}
-          </p>
+            <h3 className="text-lg sm:text-xl font-sans font-bold text-stone-900 tracking-tight">
+              <Link
+                href={`/reviews/${product.slug}`}
+                className="hover:text-forest-800 transition-colors"
+              >
+                {product.name}
+              </Link>
+            </h3>
+            <p className="text-xs text-stone-600 mt-0.5 max-w-xl">
+              {product.bestFor}
+            </p>
+          </div>
         </div>
 
         <div className="sm:text-right shrink-0">
@@ -59,13 +109,7 @@ export function ProductCard({
             <span>Capacity</span>
           </div>
           <div className="font-bold text-stone-900 text-xs">
-            {product.coolingCapacityBtuSacc
-              ? `${product.coolingCapacityBtuSacc.toLocaleString()} BTU (SACC)`
-              : product.heatingCapacityWatts
-              ? `${product.heatingCapacityWatts}W (5,118 BTU)`
-              : product.cadrSmoke
-              ? `CADR ${product.cadrSmoke} Smoke`
-              : "High Velocity"}
+            {capacityDisplay}
           </div>
         </div>
 
@@ -135,12 +179,22 @@ export function ProductCard({
 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-stone-100">
-        <Link
-          href={`/reviews/${product.slug}`}
-          className="text-xs font-bold uppercase tracking-wider text-stone-700 hover:text-black underline"
-        >
-          View Full Specification Matrix &rarr;
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href={`/reviews/${product.slug}`}
+            className="text-xs font-bold uppercase tracking-wider text-stone-700 hover:text-black underline"
+          >
+            View Full Specification Matrix &rarr;
+          </Link>
+          {product.reviewArticleSlug && (
+            <Link
+              href={`/${product.categoryId}/${product.reviewArticleSlug}`}
+              className="text-xs font-bold uppercase tracking-wider text-forest-800 hover:text-black underline"
+            >
+              Read Editorial Review &rarr;
+            </Link>
+          )}
+        </div>
 
         {product.affiliateSlug ? (
           <AffiliateButton
@@ -153,9 +207,10 @@ export function ProductCard({
             href={product.officialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center border border-black bg-black text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-stone-800"
+            className="inline-flex items-center justify-center gap-1.5 border border-black bg-black text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-stone-800"
           >
-            Visit Official Manufacturer Site &rarr;
+            <span>Visit Manufacturer Site</span>
+            <ExternalLink className="h-3 w-3" />
           </a>
         )}
       </div>

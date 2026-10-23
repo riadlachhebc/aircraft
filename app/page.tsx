@@ -42,7 +42,7 @@ export default function HomePage() {
               <div className="lg:col-span-8 group">
                 <Link
                   href={`/${leadStory.categoryId}/${leadStory.slug}`}
-                  className="block relative aspect-[16/9] w-full overflow-hidden bg-black"
+                  className="block relative aspect-square w-full max-w-md mx-auto lg:max-w-none overflow-hidden bg-white border border-stone-200 shadow-sm"
                 >
                   <SafeImage
                     src={leadStory.heroImage}

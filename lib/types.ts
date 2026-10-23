@@ -20,6 +20,13 @@ export interface CategoryInfo {
 
 export type ContentStatus = "draft" | "published" | "archived";
 
+export type ArticleType =
+  | "review"
+  | "comparison"
+  | "buying-guide"
+  | "problem-solver"
+  | "informational";
+
 export interface Author {
   id: string;
   name: string;
@@ -68,6 +75,21 @@ export interface Article {
   directAnswer: string;
   keyTakeaways: string[];
   limitations: string[];
+  articleType?: ArticleType;
+  primaryKeyword?: string;
+  searchIntent?: string;
+  productIds?: string[];
+  primaryProductId?: string;
+  comparedProductIds?: string[];
+  verdict?: string;
+  testedPersonally?: boolean;
+  testingMethodologyDistinction?: string;
+  verdictSummary?: {
+    ratingLabel?: string;
+    bottomLine: string;
+    idealBuyer: string;
+    avoidIf: string;
+  };
   comparisonTable?: {
     caption: string;
     optionAName: string;
@@ -103,6 +125,7 @@ export interface Product {
   slug: string;
   name: string;
   manufacturer: string;
+  brand?: string;
   modelNumber: string;
   categoryId: CategoryId;
   status: ContentStatus;
@@ -113,16 +136,18 @@ export interface Product {
   coolingCapacityBtuSacc?: number;
   coolingCapacityBtuAshrae?: number;
   heatingCapacityWatts?: number;
+  cadrSmoke?: number;
+  cadrDust?: number;
+  cadrPollen?: number;
+  airFlowCfm?: number;
   recommendedRoomSqFt: number;
   roomSizeBasis: string;
   powerConsumptionWatts: number;
+  operatingCostEstimateMonthly?: number;
   voltageFrequency: string;
   noiseDbRange: string;
   noiseConditions: string;
   energyEfficiencyRating?: string;
-  cadrSmoke?: number;
-  cadrDust?: number;
-  cadrPollen?: number;
   dimensionsInches: { width: number; depth: number; height: number };
   weightLbs: number;
   installationRequirements: string;
@@ -133,9 +158,16 @@ export interface Product {
   pros: string[];
   cons: string[];
   bestFor: string;
+  targetAudience?: string;
   editorialLimitations: string;
   evidenceType: EvidenceType;
   affiliateSlug?: string;
+  affiliateUrl?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  imageUsagePermission?: string;
+  specSources?: SourceCitation[];
+  reviewArticleSlug?: string;
 }
 
 export interface AffiliateRedirect {

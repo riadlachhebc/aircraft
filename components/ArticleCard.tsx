@@ -19,12 +19,14 @@ export function ArticleCard({
         {/* Thumbnail */}
         <Link
           href={`/${article.categoryId}/${article.slug}`}
-          className="relative aspect-[16/10] sm:w-56 shrink-0 overflow-hidden bg-stone-100"
+          className="relative aspect-square sm:w-48 shrink-0 overflow-hidden bg-white border border-stone-200"
         >
           <SafeImage
             src={article.heroImage}
             alt={article.heroImageAlt}
             categoryId={article.categoryId}
+            aspectRatio="square"
+            objectFit="contain"
             className="transition duration-300 group-hover:scale-105"
           />
           <span className="absolute top-2 left-2 z-10 bg-stone-900 text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
@@ -66,12 +68,14 @@ export function ArticleCard({
       {/* Thumbnail */}
       <Link
         href={`/${article.categoryId}/${article.slug}`}
-        className="relative aspect-[16/10] w-full overflow-hidden bg-stone-100"
+        className="relative aspect-square w-full overflow-hidden bg-white border-b border-stone-100"
       >
         <SafeImage
           src={article.heroImage}
           alt={article.heroImageAlt}
           categoryId={article.categoryId}
+          aspectRatio="square"
+          objectFit="contain"
           className="transition duration-300 group-hover:scale-105"
         />
         <div className="absolute top-2 left-2 z-10">

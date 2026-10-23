@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { getPublishedProducts } from "@/data/products";
+import { getPublishedReviewArticles } from "@/data/articles";
 import { CATEGORY_LIST } from "@/data/categories";
 import { ProductCard } from "@/components/ProductCard";
+import { ArticleCard } from "@/components/ArticleCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AffiliateNotice } from "@/components/AffiliateNotice";
 import { getCanonicalUrl, buildBreadcrumbSchema } from "@/lib/seo";
-import { ShieldCheck, Zap, ArrowRight } from "lucide-react";
+import { ShieldCheck, Zap, ArrowRight, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Product Reviews & Technical Specification Sheets | Air Crafted Home",
@@ -19,8 +21,11 @@ export const metadata: Metadata = {
 
 export default function ReviewsIndexPage() {
   const publishedProducts = getPublishedProducts();
+  const reviewArticles = getPublishedReviewArticles();
   const breadcrumbs = [{ name: "Reviews", href: "/reviews" }];
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
+
+  const hasContent = publishedProducts.length > 0 || reviewArticles.length > 0;
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 space-y-8">
@@ -48,12 +53,40 @@ export default function ReviewsIndexPage() {
 
       <AffiliateNotice />
 
-      {publishedProducts.length > 0 ? (
-        <section className="space-y-5">
-          {publishedProducts.map((product) => (
-            <ProductCard key={product.slug} product={product} />
-          ))}
-        </section>
+      {hasContent ? (
+        <div className="space-y-10">
+          {reviewArticles.length > 0 && (
+            <section className="space-y-4">
+              <div className="flex items-center gap-2 border-b-2 border-black pb-2">
+                <BookOpen className="h-4 w-4 text-forest-700" />
+                <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
+                  In-Depth Editorial Product Reviews
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {reviewArticles.map((article) => (
+                  <ArticleCard key={article.slug} article={article} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {publishedProducts.length > 0 && (
+            <section className="space-y-4">
+              <div className="flex items-center gap-2 border-b-2 border-black pb-2">
+                <ShieldCheck className="h-4 w-4 text-forest-700" />
+                <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
+                  Verified Technical Specification Matrices
+                </h2>
+              </div>
+              <div className="space-y-5">
+                {publishedProducts.map((product) => (
+                  <ProductCard key={product.slug} product={product} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       ) : (
         <section className="border border-stone-300 bg-white p-6 sm:p-10 space-y-5">
           <div className="space-y-2">

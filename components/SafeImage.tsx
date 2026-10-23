@@ -13,6 +13,7 @@ interface SafeImageProps {
   fill?: boolean;
   width?: number;
   height?: number;
+  objectFit?: "contain" | "cover";
 }
 
 const CATEGORY_FALLBACK_MAP: Record<string, string> = {
@@ -29,10 +30,11 @@ export function SafeImage({
   categoryId,
   className = "",
   priority = false,
-  aspectRatio = "16/10",
+  aspectRatio = "square",
   fill = true,
   width,
   height,
+  objectFit = "contain",
 }: SafeImageProps) {
   const [hasError, setHasError] = useState(false);
 
@@ -45,7 +47,7 @@ export function SafeImage({
   // If using fill mode (default inside responsive aspect-ratio container)
   if (fill) {
     return (
-      <div className={`relative w-full h-full overflow-hidden bg-stone-100 ${className}`}>
+      <div className={`relative w-full h-full overflow-hidden bg-white ${className}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={resolvedSrc}
@@ -53,7 +55,9 @@ export function SafeImage({
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           onError={() => setHasError(true)}
-          className={`h-full w-full object-cover transition duration-300 ${
+          className={`h-full w-full ${
+            objectFit === "contain" ? "object-contain" : "object-cover"
+          } transition duration-300 ${
             hasError ? "object-contain p-4 bg-stone-50" : ""
           }`}
         />
@@ -68,11 +72,13 @@ export function SafeImage({
       src={resolvedSrc}
       alt={alt}
       width={width || 600}
-      height={height || 400}
+      height={height || 600}
       loading={priority ? "eager" : "lazy"}
       decoding="async"
       onError={() => setHasError(true)}
-      className={`object-cover bg-stone-100 ${className}`}
+      className={`${
+        objectFit === "contain" ? "object-contain" : "object-cover"
+      } bg-white ${className}`}
     />
   );
 }

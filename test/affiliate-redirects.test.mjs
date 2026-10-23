@@ -7,12 +7,17 @@ import {
 } from "../data/affiliateRedirects.ts";
 import sitemap from "../app/sitemap.ts";
 
-test("Affiliate Redirect: Production registry is clean with 0 demo destinations", () => {
-  assert.equal(
-    Object.keys(AFFILIATE_REGISTRY).length,
-    0,
-    "AFFILIATE_REGISTRY must contain 0 demo destinations for clean launch"
-  );
+test("Affiliate Redirect: Production registry contains only valid approved destinations", () => {
+  // Verify that any registered destination is valid, active, and allowlisted
+  for (const [slug, entry] of Object.entries(AFFILIATE_REGISTRY)) {
+    const val = validateAffiliateRedirect(slug);
+    assert.equal(val.isValid, true, `Slug ${slug} must be valid: ${val.reason}`);
+    assert.equal(entry.destinationUrl.startsWith("https://"), true);
+  }
+  // Verify specific registration of Lasko affiliate redirect
+  const laskoVal = validateAffiliateRedirect("lasko-duo-comfort-38-dc");
+  assert.equal(laskoVal.isValid, true);
+  assert.equal(laskoVal.redirect?.destinationUrl, "https://lasko.sjv.io/jR39Ov");
 });
 
 test("Affiliate Redirect: Unknown or unconfigured slug is rejected safely", () => {
@@ -32,6 +37,8 @@ test("Affiliate Redirect: Merchant hostname allowlist security checks", () => {
   assert.equal(ALLOWED_MERCHANT_HOSTNAMES.has("www.amazon.com"), true);
   assert.equal(ALLOWED_MERCHANT_HOSTNAMES.has("www.homedepot.com"), true);
   assert.equal(ALLOWED_MERCHANT_HOSTNAMES.has("www.target.com"), true);
+  assert.equal(ALLOWED_MERCHANT_HOSTNAMES.has("lasko.sjv.io"), true);
+  assert.equal(ALLOWED_MERCHANT_HOSTNAMES.has("lasko.com"), true);
 });
 
 test("Affiliate Redirect: /go/ endpoints and search queries are NOT in sitemap", () => {

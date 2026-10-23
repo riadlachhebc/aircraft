@@ -24,29 +24,29 @@ export const ALLOWED_MERCHANT_HOSTNAMES = new Set([
   "www.dreo.com",
   "levoit.com",
   "www.levoit.com",
+  "lasko.com",
+  "www.lasko.com",
+  "lasko.sjv.io",
 ]);
 
 /**
  * Centralized server-side registry of affiliate links.
  *
- * All demo affiliate links and sample tracking destinations have been reset for launch.
- * Register genuine affiliate redirects below once approved by partner merchant networks.
- *
- * Example Schema:
- * ```typescript
- * "example-appliance-slug": {
- *   slug: "example-appliance-slug",
- *   productId: "example-sku",
- *   productName: "Manufacturer Model Name",
- *   merchant: "Amazon / Official Store",
- *   destinationUrl: "https://www.amazon.com/dp/B0XXXXXX?tag=youraffid-20",
- *   isActive: true,
- *   lastVerifiedDate: "2026-11-01",
- *   disclosureNotice: "Air Crafted Home may receive a commission on qualified purchases made through this link at no additional cost to you.",
- * }
- * ```
+ * Real, approved affiliate tracking destinations are registered below.
  */
-export const AFFILIATE_REGISTRY: Record<string, AffiliateRedirect> = {};
+export const AFFILIATE_REGISTRY: Record<string, AffiliateRedirect> = {
+  "lasko-duo-comfort-38-dc": {
+    slug: "lasko-duo-comfort-38-dc",
+    productId: "lasko-duo-comfort-38-dc-fhv830",
+    productName: "Lasko DUO Comfort 38\" DC Tower Fan & Ceramic Space Heater (FHV830)",
+    merchant: "Lasko Official Store",
+    destinationUrl: "https://lasko.sjv.io/jR39Ov",
+    isActive: true,
+    lastVerifiedDate: "2026-10-23",
+    disclosureNotice:
+      "Air Crafted Home may receive a referral commission on qualified purchases made through this link at no additional cost to you.",
+  },
+};
 
 /**
  * Validates whether a redirect slug exists, is active, and points to an allowed secure URL.

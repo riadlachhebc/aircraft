@@ -118,16 +118,27 @@ npm run dev
 # 3. Run automated tests (calculator, affiliate redirects, schemas, editorial checks)
 npm test
 
-# 4. Run TypeScript checks and production build
+# 4. Run content and publication schema validation
+npm run validate:content
+
+# 5. Run TypeScript checks and production build
 npm run build
 
-# 5. Start production server locally
+# 6. Start production server locally
 npm start
 ```
 
 ---
 
-## 7. Launch Checklist for Site Owner
+## 7. Article Publishing System & Editorial Workflow
+
+For the complete publishing architecture, schemas, and repeatable prompt template, refer to:
+- [`docs/PUBLISHING_WORKFLOW.md`](docs/PUBLISHING_WORKFLOW.md): Complete system documentation and step-by-step publishing instructions.
+- [`docs/ARTICLE_PUBLISHING_PROMPT.md`](docs/ARTICLE_PUBLISHING_PROMPT.md): Reusable prompt template for generating, auditing, and registering new articles.
+
+---
+
+## 8. Launch Checklist for Site Owner
 
 Before taking the domain live to commercial traffic:
 

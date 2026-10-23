@@ -2,11 +2,13 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
 import { getPublishedProducts, getPublishedProductBySlug } from "@/data/products";
+import { getPublishedArticleForProduct, getPublishedArticleBySlug } from "@/data/articles";
 import { CATEGORIES } from "@/data/categories";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AffiliateNotice } from "@/components/AffiliateNotice";
 import { AffiliateButton } from "@/components/AffiliateButton";
 import { ResponsiveTable } from "@/components/ResponsiveTable";
+import { SafeImage } from "@/components/SafeImage";
 import {
   getCanonicalUrl,
   buildProductSchema,
@@ -19,6 +21,7 @@ import {
   ExternalLink,
   Wrench,
   AlertCircle,
+  BookOpen,
 } from "lucide-react";
 
 export async function generateStaticParams() {
@@ -71,11 +74,16 @@ export default async function ProductDetailPage({
     { name: product.name, href: `/reviews/${product.slug}` },
   ];
 
+  const reviewArticle =
+    (product.reviewArticleSlug ? getPublishedArticleBySlug(product.reviewArticleSlug) : undefined) ||
+    getPublishedArticleForProduct(product.id) ||
+    getPublishedArticleForProduct(product.slug);
+
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
   const productSchema = buildProductSchema(product);
 
   const specRows: [string, string][] = [
-    ["Manufacturer", product.manufacturer],
+    ["Manufacturer", product.brand || product.manufacturer],
     ["Model / SKU Number", product.modelNumber],
     [
       "Primary Capacity Rating",
@@ -84,7 +92,9 @@ export default async function ProductDetailPage({
         : product.heatingCapacityWatts
         ? `${product.heatingCapacityWatts}W (5,118 BTU/h)`
         : product.cadrSmoke
-        ? `CADR: Smoke ${product.cadrSmoke} / Dust ${product.cadrDust} / Pollen ${product.cadrPollen}`
+        ? `CADR: Smoke ${product.cadrSmoke} / Dust ${product.cadrDust || "-"} / Pollen ${product.cadrPollen || "-"}`
+        : product.airFlowCfm
+        ? `${product.airFlowCfm.toLocaleString()} CFM (High Velocity Airflow)`
         : "Whole-Room Aerodynamic Vortex",
     ],
     [
@@ -123,72 +133,112 @@ export default async function ProductDetailPage({
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Header */}
-      <header className="border-2 border-black bg-stone-50 p-6 sm:p-8 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="bg-black text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
-              {product.manufacturer}
-            </span>
-            <span className="font-mono text-xs text-stone-600 font-bold">
-              MODEL {product.modelNumber}
-            </span>
-            <span className="inline-flex items-center gap-1 border border-stone-300 bg-white px-2 py-0.5 text-[10px] font-bold text-stone-800 uppercase tracking-wider">
-              <ShieldCheck className="h-3 w-3 text-forest-700" />
-              Verified Spec Sheet
-            </span>
-          </div>
-
-          <div className="text-right">
-            <div className="text-3xl font-black font-sans text-black">
-              ${product.approximateUsdPrice}
+      <header className="border-2 border-black bg-stone-50 p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          {product.imageUrl && (
+            <div className="w-full md:w-56 aspect-square shrink-0 overflow-hidden border border-stone-200 bg-white shadow-sm">
+              <SafeImage
+                src={product.imageUrl}
+                alt={product.imageAlt || product.name}
+                categoryId={product.categoryId}
+                priority={true}
+              />
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
-              Verified {product.priceVerifiedDate}
-            </div>
-          </div>
-        </div>
-
-        <h1 className="font-sans font-black text-2xl sm:text-4xl uppercase tracking-tight text-black">
-          {product.name}
-        </h1>
-
-        <p className="text-sm sm:text-base text-stone-700 leading-relaxed max-w-2xl font-normal">
-          {product.bestFor}
-        </p>
-
-        {/* Action Button */}
-        <div className="pt-3 flex flex-wrap items-center gap-3 border-t border-stone-200">
-          {product.affiliateSlug ? (
-            <AffiliateButton
-              slug={product.affiliateSlug}
-              productName={product.name}
-              price={product.approximateUsdPrice}
-            />
-          ) : (
-            <a
-              href={product.officialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-stone-800 transition"
-            >
-              <span>Visit Official Manufacturer Site</span>
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
           )}
 
-          <a
-            href={product.officialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-bold uppercase tracking-wider text-stone-600 hover:text-black underline flex items-center gap-1"
-          >
-            <span>Official Documentation</span>
-            <ExternalLink className="h-3 w-3" />
-          </a>
+          <div className="flex-1 space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="bg-black text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
+                  {product.manufacturer}
+                </span>
+                <span className="font-mono text-xs text-stone-600 font-bold">
+                  MODEL {product.modelNumber}
+                </span>
+                <span className="inline-flex items-center gap-1 border border-stone-300 bg-white px-2 py-0.5 text-[10px] font-bold text-stone-800 uppercase tracking-wider">
+                  <ShieldCheck className="h-3 w-3 text-forest-700" />
+                  Verified Spec Sheet
+                </span>
+              </div>
+
+              <div className="text-right">
+                <div className="text-3xl font-black font-sans text-black">
+                  ${product.approximateUsdPrice}
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
+                  Verified {product.priceVerifiedDate}
+                </div>
+              </div>
+            </div>
+
+            <h1 className="font-sans font-black text-2xl sm:text-4xl uppercase tracking-tight text-black">
+              {product.name}
+            </h1>
+
+            <p className="text-sm sm:text-base text-stone-700 leading-relaxed max-w-2xl font-normal">
+              {product.bestFor}
+            </p>
+
+            {/* Action Button */}
+            <div className="pt-3 flex flex-wrap items-center gap-3 border-t border-stone-200">
+              {product.affiliateSlug ? (
+                <AffiliateButton
+                  slug={product.affiliateSlug}
+                  productName={product.name}
+                  price={product.approximateUsdPrice}
+                />
+              ) : (
+                <a
+                  href={product.officialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-stone-800 transition"
+                >
+                  <span>Visit Official Manufacturer Site</span>
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              )}
+
+              <a
+                href={product.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold uppercase tracking-wider text-stone-600 hover:text-black underline flex items-center gap-1"
+              >
+                <span>Official Documentation</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          </div>
         </div>
       </header>
 
       <AffiliateNotice />
+
+      {/* In-Depth Review Article Link Banner if Available */}
+      {reviewArticle && (
+        <div className="border-2 border-forest-800 bg-forest-50/50 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-forest-800">
+              <BookOpen className="h-3.5 w-3.5 text-forest-700" />
+              <span>In-Depth Editorial Review Available</span>
+            </div>
+            <h3 className="font-sans font-bold text-base text-black">
+              {reviewArticle.title}
+            </h3>
+            <p className="text-xs text-stone-600 line-clamp-2">
+              {reviewArticle.metaDescription}
+            </p>
+          </div>
+          <Link
+            href={`/${reviewArticle.categoryId}/${reviewArticle.slug}`}
+            className="inline-flex items-center gap-1.5 bg-forest-800 text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-black transition shrink-0"
+          >
+            <span>Read Full Review</span>
+            <ExternalLink className="h-3 w-3" />
+          </Link>
+        </div>
+      )}
 
       {/* Pros & Cons */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -238,6 +288,35 @@ export default async function ProductDetailPage({
           rows={specRows.map(([param, val]) => [param, val])}
         />
       </section>
+
+      {/* Verified Specification Sources if Present */}
+      {product.specSources && product.specSources.length > 0 && (
+        <section className="border border-stone-200 bg-stone-50 p-5 space-y-2">
+          <h3 className="text-xs font-black uppercase tracking-wider text-stone-700 flex items-center gap-1.5">
+            <ShieldCheck className="h-4 w-4 text-forest-700" />
+            <span>Primary Sources &amp; Verification Evidence</span>
+          </h3>
+          <ul className="space-y-1.5 text-xs text-stone-600">
+            {product.specSources.map((src, idx) => (
+              <li key={idx} className="flex items-start gap-2">
+                <span className="font-mono text-stone-400">[{idx + 1}]</span>
+                <div>
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-black underline hover:text-forest-800"
+                  >
+                    {src.title}
+                  </a>{" "}
+                  &mdash; <span className="text-stone-500">{src.publisher}</span>
+                  {src.publishedYear && ` (${src.publishedYear})`}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Editorial Limitations & Evaluation Basis */}
       <section className="border border-stone-200 bg-stone-50 p-5 space-y-1.5">

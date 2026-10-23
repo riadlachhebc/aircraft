@@ -4,12 +4,15 @@ import Link from "next/link";
 import { getPublishedArticles, getPublishedArticleBySlug } from "@/data/articles";
 import { CATEGORIES } from "@/data/categories";
 import { getAuthorById } from "@/data/authors";
-import { getPublishedProductBySlug } from "@/data/products";
+import { getPublishedProductById, getPublishedProductBySlug } from "@/data/products";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AffiliateNotice } from "@/components/AffiliateNotice";
 import { ResponsiveTable } from "@/components/ResponsiveTable";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductComparisonTable } from "@/components/ProductComparisonTable";
+import { ProductReviewSummary } from "@/components/ProductReviewSummary";
 import { ArticleCard } from "@/components/ArticleCard";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { SafeImage } from "@/components/SafeImage";
 import { AuthorAvatar } from "@/components/AuthorAvatar";
 import {
@@ -25,6 +28,7 @@ import {
   BookOpen,
   HelpCircle,
   ShieldCheck,
+  Tag,
 } from "lucide-react";
 
 export async function generateStaticParams() {
@@ -97,15 +101,43 @@ export default async function ArticleDetailPage({
     { name: article.title, href: `/${article.categoryId}/${article.slug}` },
   ];
 
+  // Resolve primary product for review articles (via primaryProductId, productIds, or relatedProductSlugs)
+  const primaryKey =
+    article.primaryProductId ||
+    article.productIds?.[0] ||
+    article.relatedProductSlugs?.[0];
+
+  const primaryProduct = primaryKey
+    ? getPublishedProductById(primaryKey) || getPublishedProductBySlug(primaryKey)
+    : undefined;
+
+  // Resolve compared products for comparison articles
+  const comparedKeys =
+    article.comparedProductIds ||
+    (article.articleType === "comparison" ? article.productIds : undefined) ||
+    [];
+
+  const comparedProducts = comparedKeys
+    .map((k) => getPublishedProductById(k) || getPublishedProductBySlug(k))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
-  const articleSchema = buildArticleSchema(article, author.name);
+  const articleSchema = buildArticleSchema(article, author.name, primaryProduct);
 
   const relatedArticles = article.relatedArticleSlugs
     .map((s) => getPublishedArticleBySlug(s))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
-  const relatedProducts = (article.relatedProductSlugs || [])
-    .map((s) => getPublishedProductBySlug(s))
+  const allProductKeys = Array.from(
+    new Set([
+      ...(article.productIds || []),
+      ...(article.relatedProductSlugs || []),
+      ...(article.primaryProductId ? [article.primaryProductId] : []),
+    ])
+  );
+
+  const relatedProducts = allProductKeys
+    .map((k) => getPublishedProductById(k) || getPublishedProductBySlug(k))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
@@ -130,6 +162,19 @@ export default async function ArticleDetailPage({
           >
             {category?.name}
           </Link>
+          {article.articleType && (
+            <span className="border border-stone-300 bg-white text-stone-800 text-[10px] font-black uppercase tracking-wider px-2 py-0.5">
+              {article.articleType === "review"
+                ? "Product Review"
+                : article.articleType === "comparison"
+                ? "Comparison"
+                : article.articleType === "buying-guide"
+                ? "Buying Guide"
+                : article.articleType === "problem-solver"
+                ? "Troubleshooting"
+                : "Informational"}
+            </span>
+          )}
           <span className="text-stone-300">&bull;</span>
           <span className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-stone-500">
             <Clock className="h-3 w-3" aria-hidden="true" />
@@ -177,13 +222,15 @@ export default async function ArticleDetailPage({
         </div>
       </header>
 
-      {/* Hero Image */}
-      <div className="relative aspect-video w-full overflow-hidden border border-black bg-stone-100">
+      {/* Hero Image - 1:1 Aspect Ratio Canvas (Uncropped) */}
+      <div className="relative aspect-square max-w-xl mx-auto w-full overflow-hidden border border-black bg-white shadow-sm">
         <SafeImage
           src={article.heroImage}
           alt={article.heroImageAlt}
           categoryId={article.categoryId}
           priority={true}
+          aspectRatio="square"
+          objectFit="contain"
         />
         <div className="absolute bottom-2 right-2 z-10 bg-black/80 px-2 py-0.5 text-[10px] font-mono text-white">
           {article.heroImageAlt}
@@ -193,20 +240,25 @@ export default async function ArticleDetailPage({
       {/* Editorial Transparency & Affiliate Disclosure */}
       <AffiliateNotice />
 
-      {/* GEO: Direct Answer Callout */}
-      <section
-        role="region"
-        aria-label="Direct Answer Summary"
-        className="border-l-4 border-black bg-stone-50 p-5 sm:p-6"
-      >
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-forest-800 mb-1.5">
-          <BookOpen className="h-4 w-4 text-forest-700" aria-hidden="true" />
-          <span>The Bottom Line / Direct Engineering Answer</span>
-        </div>
-        <p className="text-base sm:text-lg font-sans font-bold text-black leading-relaxed">
-          {article.directAnswer}
-        </p>
-      </section>
+      {/* Primary Engineering Verdict / Product Review Hero */}
+      {article.articleType === "review" && primaryProduct ? (
+        <ProductReviewSummary product={primaryProduct} article={article} />
+      ) : (
+        /* GEO: Direct Answer Callout for Informational / Comparison / Buying Guides */
+        <section
+          role="region"
+          aria-label="Direct Answer Summary"
+          className="border-l-4 border-black bg-stone-50 p-5 sm:p-6"
+        >
+          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-forest-800 mb-1.5">
+            <BookOpen className="h-4 w-4 text-forest-700" aria-hidden="true" />
+            <span>The Bottom Line / Direct Engineering Answer</span>
+          </div>
+          <p className="text-base sm:text-lg font-sans font-bold text-black leading-relaxed">
+            {article.directAnswer}
+          </p>
+        </section>
+      )}
 
       {/* Key Takeaways */}
       <section className="border border-stone-200 bg-white p-5">
@@ -224,7 +276,34 @@ export default async function ArticleDetailPage({
         </ul>
       </section>
 
-      {/* Comparison Table if Present */}
+      {/* Scientific & Testing Methodology Distinction */}
+      {article.testingMethodologyDistinction && (
+        <section className="border border-stone-200 bg-stone-50 p-4 space-y-1 text-xs">
+          <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-stone-900 text-[10.5px]">
+            <ShieldCheck className="h-4 w-4 text-forest-700" />
+            <span>Evidence Basis &amp; Evaluation Methodology</span>
+          </div>
+          <p className="text-stone-700 leading-relaxed text-[11.5px]">
+            {article.testingMethodologyDistinction}
+          </p>
+        </section>
+      )}
+
+      {/* Dynamic Equipment Comparison Table if 2+ Products Linked */}
+      {comparedProducts.length >= 2 && (
+        <section className="space-y-2">
+          <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
+            Comparative Equipment Specification Matrix
+          </h2>
+          <ProductComparisonTable
+            id={`${article.slug}-comparison`}
+            caption={`Standardized Specification Comparison: ${article.title}`}
+            products={comparedProducts}
+          />
+        </section>
+      )}
+
+      {/* Custom Comparison Table if Defined in Article */}
       {article.comparisonTable && (
         <section className="space-y-2">
           <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
@@ -256,9 +335,7 @@ export default async function ArticleDetailPage({
             <h2 className="font-sans font-black text-xl sm:text-2xl uppercase tracking-tight text-black border-b border-stone-200 pb-2">
               {sec.heading}
             </h2>
-            <div className="text-sm sm:text-base space-y-4 text-stone-700 whitespace-pre-line leading-relaxed">
-              {sec.bodyMarkdown}
-            </div>
+            <MarkdownRenderer content={sec.bodyMarkdown} />
           </section>
         ))}
       </div>
@@ -283,7 +360,9 @@ export default async function ArticleDetailPage({
       {relatedProducts.length > 0 && (
         <section className="space-y-4 pt-4 border-t-2 border-black">
           <h2 className="font-sans font-black text-xl uppercase tracking-tight text-black">
-            Referenced Equipment & Specification Sheets
+            {article.articleType === "review"
+              ? "Evaluated Model & Alternative Recommendations"
+              : "Referenced Equipment & Specification Sheets"}
           </h2>
           <div className="space-y-4">
             {relatedProducts.map((prod) => (

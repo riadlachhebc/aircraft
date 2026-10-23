@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static institutional and primary index routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/`,
+      url: baseUrl,
       lastModified: new Date("2026-10-18"),
       changeFrequency: "weekly",
       priority: 1.0,

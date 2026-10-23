@@ -62,12 +62,16 @@ export function buildWebSiteSchema() {
   };
 }
 
-export function buildArticleSchema(article: Article, authorName: string) {
+export function buildArticleSchema(
+  article: Article,
+  authorName: string,
+  primaryProduct?: Product
+) {
   const canonical = getCanonicalUrl(`/${article.categoryId}/${article.slug}`);
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "@id": `${canonical}/#article`,
+    "@type": article.articleType === "review" && primaryProduct ? "Review" : "Article",
+    "@id": `${canonical}/#${article.articleType === "review" ? "review" : "article"}`,
     isPartOf: {
       "@type": "WebPage",
       "@id": canonical,
@@ -90,6 +94,21 @@ export function buildArticleSchema(article: Article, authorName: string) {
       "@id": `${SITE_CONFIG.domain}/#organization`,
     },
   };
+
+  if (article.articleType === "review" && primaryProduct) {
+    schema.itemReviewed = {
+      "@type": "Product",
+      name: primaryProduct.name,
+      brand: {
+        "@type": "Brand",
+        name: primaryProduct.brand || primaryProduct.manufacturer,
+      },
+      model: primaryProduct.modelNumber,
+    };
+    if (article.verdict) {
+      schema.reviewBody = article.verdict;
+    }
+  }
 
   if (article.faqs && article.faqs.length > 0) {
     schema.hasPart = {
@@ -117,11 +136,12 @@ export function buildProductSchema(product: Product) {
     name: product.name,
     brand: {
       "@type": "Brand",
-      name: product.manufacturer,
+      name: product.brand || product.manufacturer,
     },
     model: product.modelNumber,
     description: product.bestFor,
     category: product.categoryId,
+    ...(product.imageUrl ? { image: product.imageUrl } : {}),
     offers: {
       "@type": "Offer",
       price: product.approximateUsdPrice,
