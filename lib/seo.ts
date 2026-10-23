@@ -80,7 +80,11 @@ export function buildArticleSchema(
     },
     headline: article.title,
     description: article.metaDescription,
-    image: [article.heroImage],
+    image: [
+      article.heroImage.startsWith("http")
+        ? article.heroImage
+        : `${SITE_CONFIG.domain}${article.heroImage}`,
+    ],
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     inLanguage: "en-US",
@@ -96,14 +100,35 @@ export function buildArticleSchema(
   };
 
   if (article.articleType === "review" && primaryProduct) {
+    const productImage = primaryProduct.imageUrl
+      ? (primaryProduct.imageUrl.startsWith("http")
+          ? primaryProduct.imageUrl
+          : `${SITE_CONFIG.domain}${primaryProduct.imageUrl}`)
+      : (article.heroImage.startsWith("http")
+          ? article.heroImage
+          : `${SITE_CONFIG.domain}${article.heroImage}`);
+
     schema.itemReviewed = {
       "@type": "Product",
       name: primaryProduct.name,
+      description: primaryProduct.bestFor || article.metaDescription,
+      image: [productImage],
       brand: {
         "@type": "Brand",
         name: primaryProduct.brand || primaryProduct.manufacturer,
       },
       model: primaryProduct.modelNumber,
+      ...(primaryProduct.approximateUsdPrice
+        ? {
+            offers: {
+              "@type": "Offer",
+              price: primaryProduct.approximateUsdPrice,
+              priceCurrency: "USD",
+              url: primaryProduct.officialUrl,
+              itemCondition: "https://schema.org/NewCondition",
+            },
+          }
+        : {}),
     };
     if (article.verdict) {
       schema.reviewBody = article.verdict;
@@ -141,7 +166,15 @@ export function buildProductSchema(product: Product) {
     model: product.modelNumber,
     description: product.bestFor,
     category: product.categoryId,
-    ...(product.imageUrl ? { image: product.imageUrl } : {}),
+    ...(product.imageUrl
+      ? {
+          image: [
+            product.imageUrl.startsWith("http")
+              ? product.imageUrl
+              : `${SITE_CONFIG.domain}${product.imageUrl}`,
+          ],
+        }
+      : {}),
     offers: {
       "@type": "Offer",
       price: product.approximateUsdPrice,

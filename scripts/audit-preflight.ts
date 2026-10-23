@@ -279,8 +279,10 @@ async function runAudit() {
     // Review Schema structured data check
     if (!reviewHtml.includes('"@type":"Review"') && !reviewHtml.includes('"@type": "Review"')) {
       report("CRITICAL", "Schema Markup", reviewPath, "Missing Schema.org @type: Review markup!");
+    } else if (!reviewHtml.includes('"offers"') || !reviewHtml.includes('"@type":"Offer"')) {
+      report("CRITICAL", "Schema Markup", reviewPath, "Missing 'offers' block in Product schema (required by Google for Product snippets)");
     } else {
-      pass("Schema Markup", "Review Schema", "Schema.org Review & itemReviewed Product schema valid");
+      pass("Schema Markup", "Review & Product Schema", "Schema.org Review & itemReviewed Product (with offers) schema valid");
     }
   } catch (err: any) {
     report("CRITICAL", "Review Page", reviewPath, `Fetch failure: ${err.message}`);

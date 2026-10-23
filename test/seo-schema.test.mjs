@@ -108,3 +108,61 @@ test("Structured Data: Product schema contains valid Offer and Brand without fab
   assert.equal(schema.offers.availability, undefined);
   assert.equal(schema.offers.itemCondition, "https://schema.org/NewCondition");
 });
+
+test("Structured Data: Review article schema includes itemReviewed Product with valid offers for GSC", () => {
+  const reviewArticle = {
+    slug: "lasko-review",
+    title: "Lasko Review",
+    metaTitle: "Lasko Review | Air Crafted Home",
+    metaDescription: "Verified review of the Lasko DUO Comfort heater.",
+    primaryIntent: "Evaluation",
+    categoryId: "heating",
+    authorId: DEFAULT_AUTHOR.id,
+    status: "published",
+    publishedAt: "2026-10-18",
+    updatedAt: "2026-10-18",
+    readTimeMinutes: 8,
+    heroImage: "/images/products/lasko-fhv830/lasko-fhv830-main.jpg",
+    heroImageAlt: "Lasko DUO",
+    directAnswer: "Great combination unit.",
+    keyTakeaways: ["Quiet DC motor"],
+    limitations: ["No oscillation in cool mode"],
+    articleType: "review",
+    contentSections: [],
+    sources: [],
+    relatedArticleSlugs: [],
+    verdict: "Recommended for bedrooms.",
+  };
+
+  const product = {
+    id: "lasko-fhv830",
+    slug: "lasko-duo-comfort-38-dc-fhv830",
+    name: "Lasko DUO Comfort 38\" DC Tower Fan & Ceramic Space Heater",
+    manufacturer: "Lasko Products, LLC",
+    brand: "Lasko",
+    modelNumber: "FHV830",
+    categoryId: "heating",
+    status: "published",
+    officialUrl: "https://lasko.com/product",
+    approximateUsdPrice: 139.99,
+    priceVerifiedDate: "2026-10-18",
+    recommendedRoomSqFt: 300,
+    roomSizeBasis: "Standard ceiling",
+    powerConsumptionWatts: 1500,
+    voltageFrequency: "120V / 60Hz",
+    noiseDbRange: "38 - 52 dBA",
+    noiseConditions: "Low fan to high heat",
+    bestFor: "Year-round personal space comfort",
+  };
+
+  const schema = buildArticleSchema(reviewArticle, DEFAULT_AUTHOR.name, product);
+  assert.equal(schema["@type"], "Review");
+  assert.equal(schema.itemReviewed["@type"], "Product");
+  assert.equal(schema.itemReviewed.name, product.name);
+  assert.equal(schema.itemReviewed.brand.name, "Lasko");
+  assert.equal(schema.itemReviewed.model, "FHV830");
+  assert.ok(schema.itemReviewed.offers, "itemReviewed Product must contain offers to satisfy Google Search Console Product snippet validation");
+  assert.equal(schema.itemReviewed.offers.price, 139.99);
+  assert.equal(schema.itemReviewed.offers.priceCurrency, "USD");
+  assert.equal(schema.itemReviewed.offers.itemCondition, "https://schema.org/NewCondition");
+});
