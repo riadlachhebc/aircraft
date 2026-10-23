@@ -169,6 +169,22 @@ for (const article of ARTICLE_LIST) {
       "Article is published but missing explicit primaryKeyword or searchIntent metadata."
     );
   }
+
+  // Check for raw LaTeX syntax in article body sections
+  const hasRawLatex = article.contentSections?.some(
+    (sec) =>
+      sec.bodyMarkdown.includes("$$") ||
+      sec.bodyMarkdown.includes("\\frac") ||
+      sec.bodyMarkdown.includes("\\text{") ||
+      sec.bodyMarkdown.includes("\\times")
+  );
+  check(
+    "Content Integrity",
+    `No Raw LaTeX Syntax: ${article.slug}`,
+    !hasRawLatex,
+    "Zero raw LaTeX math syntax ($$, \\frac, \\text) in body content",
+    "CRITICAL: Raw LaTeX math syntax detected in article content sections! Use clean Unicode/Markdown instead."
+  );
 }
 
 // 3. Audit Affiliate Registry

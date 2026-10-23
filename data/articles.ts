@@ -318,13 +318,14 @@ According to the official user manual, AutoEco operates with the following autom
 Electricity in the United States is billed by the kilowatt-hour (kWh). According to the US Energy Information Administration (EIA), the national average residential electricity tariff as of 2026 is approximately **$0.168 per kWh** (16.8 cents). Rates vary regionally, from roughly $0.11/kWh in parts of the Northwest to over $0.30/kWh in parts of the Northeast, California, and Hawaii.
 
 The formula for calculating electrical running costs is:
-$$\\text{Cost per Hour} = \\left(\\frac{\\text{Watts}}{1000}\\right) \\times \\text{Electricity Rate per kWh}$$
+
+> **Hourly Cost ($) = (Watts ÷ 1,000) × Electricity Tariff ($/kWh)**
 
 ### Transparent Cost Breakdown (at $0.168 / kWh Benchmark)
 
 - **Continuous High Heat (1,500 Watts / 1.5 kW)**:
-  - **1 Hour of Continuous Run Time**: $1.5 \\text{ kW} \\times \\$0.168 = \\mathbf{\\$0.252}$ (approx. **$0.25 per hour**).
-  - **8 Hours of Continuous Run Time**: $12 \\text{ kWh} \\times \\$0.168 = \\mathbf{\\$2.02}$ per 8-hour period.
+  - **1 Hour of Continuous Run Time**: 1.5 kW × $0.168/kWh = **$0.252** (approx. **$0.25 per hour**).
+  - **8 Hours of Continuous Run Time**: 12.0 kWh × $0.168/kWh = **$2.02** per 8-hour period.
   - *Note: Continuous 1,500W operation typically occurs only when initially warming up a cold space.*
 
 - **Estimated Lower Heat Settings (~750W to 1,000W)**:
@@ -637,13 +638,13 @@ If you turn on an electric space heater without lowering your central furnace th
 
 Heat loss through a building envelope follows Fourier's law of thermal conduction:
 
-$$Q = U \\times A \\times (T_{\\text{in}} - T_{\\text{out}})$$
+> **Q = U × A × (T_in - T_out)**
 
 Where:
-- $Q$ is the total rate of heat loss from your home (BTU/h).
-- $U$ is the thermal transmittance of your walls, windows, and attic insulation.
-- $A$ is the total exterior surface area of the building envelope.
-- $(T_{\\text{in}} - T_{\\text{out}})$ is the temperature differential between indoor living space and outdoor winter air.
+- **Q** is the total rate of heat loss from your home (BTU/h).
+- **U** is the thermal transmittance (U-factor) of your walls, windows, and attic insulation.
+- **A** is the total exterior surface area of the building envelope (sq ft).
+- **(T_in - T_out)** is the temperature differential between indoor living space and outdoor winter air (°F).
 
 When your central heating system keeps an entire 2,000-square-foot house at 68°F overnight, it must burn fuel to replace the heat escaping through every exterior wall, window, ceiling, and doorway across the entire structure—including unoccupied living rooms, dining rooms, kitchens, hallways, and spare bedrooms.
 
@@ -658,17 +659,17 @@ To demonstrate the exact financial tipping point, consider a typical 2,000-squar
 #### Scenario A: Whole-Home Central Gas Heating (No Setback)
 - Central thermostat set to 68°F continuously across the entire 2,000 sq ft home.
 - Gas furnace consumes an average of 0.40 therms per hour overnight (3.2 therms over 8 hours).
-- Overnight heating cost: $3.2 \\text{ therms} \\times \\$1.40/\\text{therm} = \\mathbf{\\$4.48 \\text{ per night}}$ (~$134.40/month).
+- Overnight heating cost: 3.2 therms × $1.40/therm = **$4.48 per night** (~$134.40/month).
 
 #### Scenario B: Zone Heating (8°F Central Setback + Supplemental Bedroom Heater)
 - Central thermostat set back from 68°F to 60°F from 10 PM to 6 AM (8 hours).
 - Reduced indoor-to-outdoor temperature differential drops central furnace runtime by approximately 25%.
-- Reduced central furnace consumption: $2.4 \\text{ therms} \\times \\$1.40/\\text{therm} = \\mathbf{\\$3.36 \\text{ per night}}$.
+- Reduced central furnace consumption: 2.4 therms × $1.40/therm = **$3.36 per night**.
 - An energy-efficient ceramic space heater with an electronic thermostat—such as the [Lasko DUO Comfort 38" DC (FHV830)](/heating/lasko-duo-comfort-38-dc-fan-heater-review)—warms the closed 200 sq ft master bedroom to 68°F.
 - Because of thermostat cycling, the 1,500W heater operates at an effective 50% duty cycle (750 Watts average draw).
-- Space heater electricity consumption: $0.75 \\text{ kW} \\times 8 \\text{ hours} = 6.0 \\text{ kWh}$.
-- Space heater electricity cost: $6.0 \\text{ kWh} \\times \\$0.168/\\text{kWh} = \\mathbf{\\$1.01 \\text{ per night}}$.
-- **Total combined overnight cost**: $\\$3.36 + \\$1.01 = \\mathbf{\\$4.37 \\text{ per night}}$ (~$131.10/month).
+- Space heater electricity consumption: 0.75 kW × 8 hours = **6.0 kWh**.
+- Space heater electricity cost: 6.0 kWh × $0.168/kWh = **$1.01 per night**.
+- **Total combined overnight cost**: $3.36 (gas furnace) + $1.01 (space heater) = **$4.37 per night** (~$131.10/month).
 - **Net result**: Net savings of ~$0.11 to $0.40 per night ($3.30 to $12.00/month) against cheap natural gas.
 
 #### Scenario C: Homes Heated by Fuel Oil or Propane (High Savings)
@@ -716,7 +717,7 @@ By actively downshifting wattage and cycling based on room conditions, an AutoEc
 
 In US residential wiring, standard household wall outlets are supplied by 120-volt alternating current (AC) on 15-Amp or 20-Amp branch circuits:
 
-$$\\text{Current (Amperes)} = \\frac{\\text{Power (Watts)}}{\\text{Voltage (Volts)}} = \\frac{1,500\\text{ W}}{120\\text{ V}} = 12.5\\text{ Amps}$$
+> **Current (Amps) = Power (Watts) ÷ Voltage (Volts) = 1,500W ÷ 120V = 12.5 Amps**
 
 Under NEC Article 210, an electrical load that runs continuously for 3 hours or longer is classified as a **continuous load** and should not exceed 80% of the branch circuit rating:
 - A standard **15-Amp branch circuit** has an 80% continuous rating of **12.0 Amps**.
