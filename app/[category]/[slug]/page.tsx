@@ -1,10 +1,19 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getPublishedArticles, getPublishedArticleBySlug } from "@/data/articles";
+import {
+  getPublishedArticles,
+  getPublishedArticleBySlug,
+  getArticleBySlug,
+} from "@/data/articles";
 import { CATEGORIES } from "@/data/categories";
 import { getAuthorById } from "@/data/authors";
-import { getPublishedProductById, getPublishedProductBySlug } from "@/data/products";
+import {
+  getPublishedProductById,
+  getPublishedProductBySlug,
+  getProductById,
+  getProductBySlug,
+} from "@/data/products";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AffiliateNotice } from "@/components/AffiliateNotice";
 import { ResponsiveTable } from "@/components/ResponsiveTable";
@@ -44,7 +53,7 @@ export async function generateMetadata({
   params: Promise<{ category: string; slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = getPublishedArticleBySlug(slug);
+  const article = getPublishedArticleBySlug(slug) || getArticleBySlug(slug);
   if (!article) return {};
 
   const canonical = getCanonicalUrl(`/${article.categoryId}/${article.slug}`);
@@ -52,6 +61,13 @@ export async function generateMetadata({
   return {
     title: article.metaTitle,
     description: article.metaDescription,
+    robots:
+      article.status === "draft"
+        ? {
+            index: false,
+            follow: false,
+          }
+        : undefined,
     alternates: {
       canonical,
     },
@@ -86,7 +102,7 @@ export default async function ArticleDetailPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const { slug, category: catSlug } = await params;
-  const article = getPublishedArticleBySlug(slug);
+  const article = getPublishedArticleBySlug(slug) || getArticleBySlug(slug);
 
   if (!article || article.categoryId !== catSlug) {
     notFound();
@@ -108,7 +124,10 @@ export default async function ArticleDetailPage({
     article.relatedProductSlugs?.[0];
 
   const primaryProduct = primaryKey
-    ? getPublishedProductById(primaryKey) || getPublishedProductBySlug(primaryKey)
+    ? getPublishedProductById(primaryKey) ||
+      getPublishedProductBySlug(primaryKey) ||
+      getProductById(primaryKey) ||
+      getProductBySlug(primaryKey)
     : undefined;
 
   // Resolve compared products for comparison articles
@@ -118,7 +137,13 @@ export default async function ArticleDetailPage({
     [];
 
   const comparedProducts = comparedKeys
-    .map((k) => getPublishedProductById(k) || getPublishedProductBySlug(k))
+    .map(
+      (k) =>
+        getPublishedProductById(k) ||
+        getPublishedProductBySlug(k) ||
+        getProductById(k) ||
+        getProductBySlug(k)
+    )
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbs);
@@ -152,6 +177,18 @@ export default async function ArticleDetailPage({
       />
 
       <Breadcrumbs items={breadcrumbs} />
+
+      {article.status === "draft" && (
+        <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded text-sm text-amber-900 flex items-center gap-3">
+          <AlertCircle className="w-5 h-5 text-amber-600 shrink-0" />
+          <div>
+            <span className="font-semibold uppercase tracking-wider text-xs bg-amber-200 text-amber-900 px-2 py-0.5 rounded mr-2">
+              Editorial Review Draft
+            </span>
+            This article is in review status and is not publicly listed or indexed.
+          </div>
+        </div>
+      )}
 
       {/* Article Header */}
       <header className="space-y-3 border-b-2 border-black pb-6">

@@ -18,6 +18,8 @@ import {
 import {
   PRODUCT_LIST,
   PRODUCTS,
+  getProductById,
+  getProductBySlug,
   getPublishedProducts,
   getPublishedProductBySlug,
   getPublishedProductById,
@@ -27,7 +29,7 @@ import { CATEGORIES } from "../data/categories.ts";
 import { DEFAULT_AUTHOR } from "../data/authors.ts";
 
 test("Production Article Registry: Published Lasko review is accessible and validated", () => {
-  // Published articles count is now 1
+  // Published articles count is 1
   const publishedArticles = getPublishedArticles();
   assert.equal(publishedArticles.length, 1, "getPublishedArticles must return 1 published article");
   assert.equal(getPublishedArticlesByCategory("heating").length, 1);
@@ -35,14 +37,18 @@ test("Production Article Registry: Published Lasko review is accessible and vali
 
   // Published article resolves correctly by slug
   const publishedArticle = getPublishedArticleBySlug("lasko-duo-comfort-38-dc-fan-heater-review");
-  assert.ok(publishedArticle);
+  assert.ok(publishedArticle, "Published article must exist in registry");
   assert.equal(publishedArticle?.status, "published");
   assert.equal(publishedArticle?.articleType, "review");
+  assert.equal(validateArticleRecord(publishedArticle).isValid, true, "Published article must pass editorial validation");
 
-  // Published product resolves correctly by slug and ID
+  // Published product resolves correctly by ID and slug
   const publishedProduct = getPublishedProductById("lasko-duo-comfort-38-dc-fhv830");
-  assert.ok(publishedProduct);
+  assert.ok(publishedProduct, "Published product must exist in registry");
   assert.equal(publishedProduct?.status, "published");
+  assert.equal(publishedProduct?.approximateUsdPrice, 159.99, "Price must reflect official Lasko.com listing");
+  assert.equal(publishedProduct?.recommendedRoomSqFt, 300, "Coverage must reflect manufacturer-stated 300 sq ft maximum");
+  assert.equal(validateProductRecord(publishedProduct).isValid, true, "Product record must pass validation");
 
   // Legacy deleted demo articles must remain undefined
   assert.equal(getPublishedArticleBySlug("how-to-choose-portable-air-conditioner-room-size"), undefined);

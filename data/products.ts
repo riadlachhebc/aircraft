@@ -142,52 +142,47 @@ export const PRODUCTS: Record<string, Product> = {
     status: "published",
     officialUrl:
       "https://lasko.com/products/lasko-duo-comfort-38-dc-tower-fan-and-ceramic-space-heater-oscillating-3-heat-settings-4-fan-speeds-remote-timer-tip-over-switch",
-    retailerUrls: [
-      {
-        merchant: "Walmart",
-        url: "https://www.walmart.com/ip/Lasko-DUO-Comfort-All-Season-High-Velocity-Hybrid-Tower-Fan-Space-Heater-FHV830/1444143493",
-      },
-    ],
-    approximateUsdPrice: 109,
+    approximateUsdPrice: 159.99,
     priceVerifiedDate: "2026-10-23",
     heatingCapacityWatts: 1500,
-    recommendedRoomSqFt: 150,
-    roomSizeBasis: "1500W Supplemental Zone Heating Standard (~10W per sq ft)",
+    recommendedRoomSqFt: 300,
+    roomSizeBasis:
+      "Manufacturer-stated maximum coverage area (up to 300 sq ft); actual thermal comfort depends on room insulation, ceiling height, and outdoor winter temperatures",
     powerConsumptionWatts: 1500,
     voltageFrequency: "120V / 60Hz (Standard US 15A Circuit)",
-    noiseDbRange: "34.9 - 55.4 dBA",
+    noiseDbRange: "Quiet DC operation (official dBA not published by manufacturer)",
     noiseConditions:
-      "Measured at 2m: 34.9 dBA low DC fan speed; 55.4 dBA maximum blower draw",
+      "Manufacturer utilizes WhisperForce brushless DC motor technology for quiet residential operation; manufacturer does not publish formal dBA acoustic lab ratings",
     dimensionsInches: { width: 8.0, depth: 10.96, height: 37.5 },
     weightLbs: 15.13,
     installationRequirements:
-      "Freestanding portable tower; tool-free quick-snap base assembly; requires 3-foot minimum clearance from combustible materials (bedding, curtains, furniture) per CPSC",
+      "Freestanding portable tower; tool-free quick-snap base assembly; requires 3-foot minimum clearance from combustible materials (bedding, curtains, furniture) per CPSC and manufacturer manual; plug directly into dedicated 120V wall outlet only (no extension cords or power strips)",
     maintenanceSchedule:
-      "Unplug prior to cleaning; vacuum intake and exhaust louvers bi-weekly with a brush attachment; wipe exterior with soft dry cloth; do not immerse in water",
+      "Unplug prior to cleaning; remove washable rear filter screen by pulling filter tab; vacuum filter and intake grills bi-weekly with brush attachment; wipe exterior with soft dry cloth; do not immerse in water",
     replacementPartsCostEstimate:
-      "$0 (Permanent vacuumable intake screens; no proprietary disposable filters required)",
+      "$0 (Permanent washable/vacuumable intake filter screen; no disposable filters required)",
     warrantyYears: 3,
-    certifications: ["ETL Listed", "Intertek Safety Certified"],
+    certifications: ["ETL Listed", "Intertek Safety Certified (UL 1278)"],
     pros: [
-      "Year-round 2-in-1 hybrid design eliminates off-season storage headaches",
-      "Brushless DC motor in fan mode runs whisper-quiet at 34.9 dBA on lowest speed",
-      "1,500W ceramic PTC element delivers immediate, localized radiant-convective warmth",
+      "Year-round 2-in-1 hybrid design eliminates off-season storage headaches by combining tower fan and ceramic heater",
+      "Brushless DC motor (WhisperForce) provides smooth, low-wattage air circulation across 4 speeds",
+      "1,500W ceramic PTC element delivers rapid supplemental warmth with 3 heat settings",
+      "AutoEco electronic thermostat cycles between High and Low heat and shuts off ~4°F above target to maintain comfort",
       "Comprehensive safety suite includes tip-over microswitch, automatic overheat cut-off, and cool-touch exterior",
-      "AutoEco electronic thermostat dynamically cycles wattage to stabilize target room temperature",
     ],
     cons: [
       "Not an air conditioner: Fan mode circulates ambient air via wind-chill effect without lowering sensible room temperature",
-      "High-heat mode continuously pulls 12.5 Amps (1,500W), making it unsuitable for use on the same circuit as other high-draw appliances",
-      "Narrow 150 sq ft effective heating zone: Cannot replace central HVAC for large open-plan spaces",
-      "Initial break-in odor: Ceramic heating element and protective coatings emit a faint warm-dust odor during the first few operational hours",
+      "High-heat mode draws up to 12.5 Amps (1,500W), requiring a dedicated 120V wall outlet (never extension cords or power strips)",
+      "Manufacturer coverage of up to 300 sq ft is supplemental; heating performance varies significantly in drafty or high-ceiling spaces",
+      "Initial break-in odor: Ceramic heating element and protective coatings emit a slight temporary warm odor during initial heating cycles",
     ],
     bestFor:
-      "Medium-sized bedrooms, home offices, and dens (up to 150 sq ft) needing all-season climate control with zero closet storage",
+      "Bedrooms, home offices, and living spaces up to 300 sq ft needing all-season comfort with zero off-season appliance storage",
     targetAudience:
-      "Renters, remote workers, and suburban homeowners seeking supplemental zone heating in winter and quiet air circulation in summer",
+      "Renters, remote workers, and homeowners seeking supplemental zone heating in winter and quiet air circulation in summer",
     editorialLimitations:
-      "Supplemental zone heater only. Effective heating is thermally limited to bounded rooms up to 150 sq ft. Does not provide refrigerated cooling or air conditioning. Must maintain 3-foot clearance from combustibles per CPSC guidelines.",
-    evidenceType: "independent-consensus",
+      "Supplemental zone heater and air circulator only. Does not provide refrigerated cooling or air conditioning. Effective heating in larger spaces depends on room insulation and outdoor temperatures. Requires a dedicated 120V outlet and 3-foot clearance from combustibles.",
+    evidenceType: "manufacturer-spec",
     affiliateSlug: "lasko-duo-comfort-38-dc",
     affiliateUrl: "https://lasko.sjv.io/jR39Ov",
     reviewArticleSlug: "lasko-duo-comfort-38-dc-fan-heater-review",
@@ -209,7 +204,7 @@ export const PRODUCTS: Record<string, Product> = {
         url: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Heating-and-Thermal-Safety",
       },
       {
-        title: "ETL Safety Certification Directory",
+        title: "Intertek Directory of Listed Products (ETL / UL 1278)",
         publisher: "Intertek",
         url: "https://www.intertek.com",
       },
