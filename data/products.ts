@@ -265,10 +265,10 @@ export const PRODUCTS: Record<string, Product> = {
     affiliateSlug: "lasko-ellipse-12-ceramic",
     affiliateUrl: "https://lasko.sjv.io/E0X5V9",
     reviewArticleSlug: "best-space-heater-for-home-office",
-    imageUrl: "/images/fallback-heating.svg",
+    imageUrl: "/images/products/lasko-cd12950/lasko-cd12950-main.jpg",
     imageAlt: "Lasko Ellipse 12-Inch Ceramic Space Heater Model CD12950",
     imageUsagePermission:
-      "Editorial illustration schematic for Air Crafted Home heating evaluation",
+      "Official manufacturer product documentation and retail distribution asset via Lasko Products, LLC",
     specSources: [
       {
         title:

@@ -862,9 +862,9 @@ When selecting a space heater for bedroom zone heating, verify that the unit inc
     publishedAt: "2026-10-25",
     updatedAt: "2026-10-25",
     readTimeMinutes: 11,
-    heroImage: "/images/fallback-heating.svg",
+    heroImage: "/images/products/lasko-cd12950/lasko-cd12950-desk-home-office.jpg",
     heroImageAlt:
-      "Best Space Heater for a Home Office: Compact Ceramic Buying Guide",
+      "Lasko Ellipse 12-inch compact ceramic space heater in a modern home office desk workspace",
     directAnswer:
       "The best space heater for a home office is a compact, fan-assisted Positive Temperature Coefficient (PTC) ceramic heater featuring multiple heat settings (such as 750W Low and 1,500W High), widespread oscillation (90° to 120°), and an automatic electronic thermostat. Because home offices typically range from 100 to 200 square feet, a compact 12-inch ceramic tower heater provides targeted, rapid convective warmth within 60 seconds without consuming valuable desk or floor space. For desk setups, non-negotiable safety features include a physical tip-over microswitch, automatic overheat protection, cool-touch outer housing, and a dedicated 120V wall receptacle with at least 3 feet of clearance from combustible papers, drapery, and furniture per CPSC and NFPA guidelines. A compact unit like the Lasko Ellipse 12\" (CD12950) illustrates these core criteria, offering 120° oscillation, 3 heat stages, and an integrated child lock for compact workspaces.",
     verdict:
@@ -965,6 +965,8 @@ All residential 120V electric space heaters in the United States are capped by s
 ### 3. Widespread Oscillation vs. Static Directional Blasts
 Static heaters blow a concentrated column of hot air in one fixed direction. If placed near your feet, a static heater can uncomfortably toast your shins while leaving your upper body chilled. A unit with 90° to 120° motorized oscillation circulates heated air across your seated workspace, creating a gentle thermal envelope rather than an intense hotspot.
 
+![Lasko Ellipse 12-inch space heater featuring 120-degree widespread oscillation to distribute warmth across a seated desk workspace](/images/products/lasko-cd12950/lasko-cd12950-oscillation.jpg)
+
 ### 4. Acoustic Profile for Phone Calls and Video Meetings
 Remote workers spend hours on Zoom, Teams, and phone calls. While oil-filled radiators are completely silent, their slow warm-up time is a drawback. A quality ceramic heater uses a balanced internal blower fan that emits a soft, steady white noise (ideally under 40 to 45 decibels on low settings) that microphone noise-suppression algorithms easily filter out.
 
@@ -1015,8 +1017,12 @@ A compact oscillating space heater for home office use sweeps warmth back and fo
 ### 4. Digital Auto-Off Timers
 How often do you leave your desk for lunch or walk away at the end of the day and forget to turn off your space heater? A built-in timer (ranging from 1 to 12 hours) ensures the heater powers down automatically, preventing hours of unattended energy waste.
 
+![Lasko Ellipse space heater with 12-hour auto-off timer providing timed supplemental comfort in home workspaces and bedrooms](/images/products/lasko-cd12950/lasko-cd12950-bedroom-timer.jpg)
+
 ### 5. Child and Pet Safety Locks
 In households with curious toddlers or playful pets, control panels placed at desk height are tempting targets. A **Child Lock** feature—which locks the digital controls so settings cannot be accidentally altered—adds an extra layer of operational peace of mind.
+
+![Lasko Ellipse top-mounted digital touch controls showing 3 heat settings, AutoEco thermostat, and 3-second Child Lock](/images/products/lasko-cd12950/lasko-cd12950-touch-controls.jpg)
 
 ### 6. Remote Control Convenience
 When you are on an important client video call or deep in focused spreadsheet work, leaning over to fiddle with floor controls breaks your concentration. A compact multi-function remote lets you adjust temperature, toggle oscillation, or silence the unit from your chair.`,
@@ -1036,6 +1042,8 @@ According to official manufacturer documentation from Lasko Products, LLC:
 - **Thermostatic Control**: Built-in **AutoEco Mode**, which regulates heat output to maintain a selected target comfort temperature while reducing overall electrical draw.
 - **Digital Controls & Remote**: Touch-sensing top digital controls with an auto-dimming LED display, paired with a multi-function handheld remote control.
 - **Integrated Timer**: Digital auto-off timer programmable in 30-minute increments up to 2 hours, and 1-hour increments up to **12 hours**.
+
+![Lasko Ellipse 12-inch compact ceramic space heater model CD12950 with front digital temperature readout](/images/products/lasko-cd12950/lasko-cd12950-main.jpg)
 
 ### Safety Features and Child Lock
 The Lasko Ellipse includes standard North American electrical safety certifications (**ETL Listed / UL 1278 standard**) and incorporates three critical protective mechanisms:
