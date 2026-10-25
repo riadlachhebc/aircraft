@@ -46,6 +46,17 @@ export const AFFILIATE_REGISTRY: Record<string, AffiliateRedirect> = {
     disclosureNotice:
       "Air Crafted Home may receive a referral commission on qualified purchases made through this link at no additional cost to you.",
   },
+  "lasko-ellipse-12-ceramic": {
+    slug: "lasko-ellipse-12-ceramic",
+    productId: "lasko-ellipse-12-ceramic-cd12950",
+    productName: "Lasko Ellipse 12\" Ceramic Space Heater (CD12950)",
+    merchant: "Lasko Official Store",
+    destinationUrl: "https://lasko.sjv.io/E0X5V9",
+    isActive: true,
+    lastVerifiedDate: "2026-10-25",
+    disclosureNotice:
+      "Air Crafted Home may receive a referral commission on qualified purchases made through this link at no additional cost to you.",
+  },
 };
 
 /**

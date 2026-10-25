@@ -210,6 +210,85 @@ export const PRODUCTS: Record<string, Product> = {
       },
     ],
   },
+  "lasko-ellipse-12-ceramic-cd12950": {
+    id: "lasko-ellipse-12-ceramic-cd12950",
+    slug: "lasko-ellipse-12-ceramic-cd12950",
+    name: "Lasko Ellipse 12\" Ceramic Space Heater",
+    manufacturer: "Lasko",
+    brand: "Lasko",
+    modelNumber: "CD12950",
+    categoryId: "heating",
+    status: "published",
+    officialUrl:
+      "https://lasko.com/products/lasko-ellipse-12-ceramic-space-heater-oscillating-3-heat-settings-tip-over-switch-child-lock",
+    approximateUsdPrice: 69.99,
+    priceVerifiedDate: "2026-10-25",
+    heatingCapacityWatts: 1500,
+    recommendedRoomSqFt: 150,
+    roomSizeBasis:
+      "Personal desk area and compact home office supplemental heating (up to 150 sq ft); actual thermal comfort depends on room insulation, ceiling height, and outdoor temperatures",
+    powerConsumptionWatts: 1500,
+    voltageFrequency: "120V / 60Hz (Standard US 15A Circuit)",
+    noiseDbRange:
+      "Quiet operation (<40 dB reported in retail specifications; official acoustic lab rating not published by manufacturer)",
+    noiseConditions:
+      "Internal cross-flow/blower fan across 2 fan speeds; manufacturer does not publish formal sound chamber dBA ratings",
+    dimensionsInches: { width: 6.11, depth: 4.86, height: 11.65 },
+    weightLbs: 3.1,
+    installationRequirements:
+      "Freestanding compact tabletop or floor placement; requires 3-foot minimum clearance from combustible materials (papers, curtains, furniture, bedding) per CPSC and manufacturer manual; plug directly into dedicated 120V wall outlet only (no extension cords or power strips)",
+    maintenanceSchedule:
+      "Unplug prior to cleaning; wipe exterior grilles with a soft dry cloth or vacuum with brush attachment bi-weekly; do not immerse in water; store in original packaging in a cool, dry place",
+    replacementPartsCostEstimate:
+      "$0 (Permanent intake screen; no disposable filters required)",
+    warrantyYears: 3,
+    certifications: ["ETL Listed", "Intertek Safety Certified (UL 1278)"],
+    pros: [
+      "Compact 11.65-inch vertical profile with a 4.86\" x 6.11\" footprint well-suited for home office desks and compact workspaces",
+      "120-degree widespread oscillation distributes convective warmth across a broader seated personal zone",
+      "Positive Temperature Coefficient (PTC) ceramic heating element delivers rapid supplemental heat within 60 seconds",
+      "Integrated Child Lock function (activated by holding button for 3 seconds) prevents unintended setting adjustments by children or pets",
+      "Built-in safety suite includes tip-over microswitch, automatic overheat thermal cut-off, and cool-touch housing",
+    ],
+    cons: [
+      "High-heat mode draws up to 12.5 Amps (1,500W), requiring a dedicated 120V wall receptacle (never extension cords or power strips)",
+      "Personal/desk-zone supplemental heater; not designed to heat large rooms, vaulted spaces, or open-concept living plans",
+      "Price and availability subject to change from the supplied $69.99 baseline; check official manufacturer listing before purchasing",
+    ],
+    bestFor:
+      "Home offices, desks, dens, and bedrooms up to 150 sq ft needing compact supplemental warmth and tabletop versatility",
+    targetAudience:
+      "Remote workers, students, and homeowners seeking affordable personal zone heating with oscillation, touch controls, and child safety features",
+    editorialLimitations:
+      "Supplemental personal and small-room heater only. Does not replace central heating. Effective warmth depends on room insulation and distance from the unit. Requires a dedicated 120V wall outlet and 3-foot clearance from combustibles.",
+    evidenceType: "manufacturer-spec",
+    affiliateSlug: "lasko-ellipse-12-ceramic",
+    affiliateUrl: "https://lasko.sjv.io/E0X5V9",
+    reviewArticleSlug: "best-space-heater-for-home-office",
+    imageUrl: "/images/fallback-heating.svg",
+    imageAlt: "Lasko Ellipse 12-Inch Ceramic Space Heater Model CD12950",
+    imageUsagePermission:
+      "Editorial illustration schematic for Air Crafted Home heating evaluation",
+    specSources: [
+      {
+        title:
+          "Lasko Ellipse 12\" Ceramic Space Heater Product Specifications & Manual",
+        publisher: "Lasko Products, LLC",
+        url: "https://lasko.com/products/lasko-ellipse-12-ceramic-space-heater-oscillating-3-heat-settings-tip-over-switch-child-lock",
+      },
+      {
+        title:
+          "CPSC Space Heater Safety Clearances & Fire Prevention Guidelines",
+        publisher: "US Consumer Product Safety Commission (CPSC)",
+        url: "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Heating-and-Thermal-Safety",
+      },
+      {
+        title: "Intertek Directory of Listed Products (ETL / UL 1278 Standard)",
+        publisher: "Intertek",
+        url: "https://www.intertek.com",
+      },
+    ],
+  },
 };
 
 export const PRODUCT_LIST: Product[] = Object.values(PRODUCTS);

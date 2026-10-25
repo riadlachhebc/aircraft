@@ -29,10 +29,10 @@ import { CATEGORIES } from "../data/categories.ts";
 import { DEFAULT_AUTHOR } from "../data/authors.ts";
 
 test("Production Article Registry: Published Lasko review is accessible and validated", () => {
-  // Published articles count is 2
+  // Published articles count is 3
   const publishedArticles = getPublishedArticles();
-  assert.equal(publishedArticles.length, 2, "getPublishedArticles must return 2 published articles");
-  assert.equal(getPublishedArticlesByCategory("heating").length, 2);
+  assert.equal(publishedArticles.length, 3, "getPublishedArticles must return 3 published articles");
+  assert.equal(getPublishedArticlesByCategory("heating").length, 3);
   assert.equal(getPublishedArticlesByCategory("air-conditioners").length, 0);
 
   // Published article resolves correctly by slug
@@ -49,13 +49,27 @@ test("Production Article Registry: Published Lasko review is accessible and vali
   assert.equal(publishedGuide?.articleType, "problem-solver");
   assert.equal(validateArticleRecord(publishedGuide).isValid, true, "Published guide must pass editorial validation");
 
-  // Published product resolves correctly by ID and slug
+  // Published home office buying guide resolves correctly by slug
+  const publishedBuyingGuide = getPublishedArticleBySlug("best-space-heater-for-home-office");
+  assert.ok(publishedBuyingGuide, "Published home office buying guide must exist in registry");
+  assert.equal(publishedBuyingGuide?.status, "published");
+  assert.equal(publishedBuyingGuide?.articleType, "buying-guide");
+  assert.equal(validateArticleRecord(publishedBuyingGuide).isValid, true, "Published buying guide must pass editorial validation");
+
+  // Published products resolve correctly by ID and slug
   const publishedProduct = getPublishedProductById("lasko-duo-comfort-38-dc-fhv830");
   assert.ok(publishedProduct, "Published product must exist in registry");
   assert.equal(publishedProduct?.status, "published");
   assert.equal(publishedProduct?.approximateUsdPrice, 159.99, "Price must reflect official Lasko.com listing");
   assert.equal(publishedProduct?.recommendedRoomSqFt, 300, "Coverage must reflect manufacturer-stated 300 sq ft maximum");
   assert.equal(validateProductRecord(publishedProduct).isValid, true, "Product record must pass validation");
+
+  const publishedEllipse = getPublishedProductById("lasko-ellipse-12-ceramic-cd12950");
+  assert.ok(publishedEllipse, "Published Ellipse product must exist in registry");
+  assert.equal(publishedEllipse?.status, "published");
+  assert.equal(publishedEllipse?.approximateUsdPrice, 69.99, "Price must reflect supplied $69.99 listing");
+  assert.equal(publishedEllipse?.recommendedRoomSqFt, 150, "Coverage must reflect 150 sq ft personal/desk space rating");
+  assert.equal(validateProductRecord(publishedEllipse).isValid, true, "Ellipse product record must pass validation");
 
   // Legacy deleted demo articles must remain undefined
   assert.equal(getPublishedArticleBySlug("how-to-choose-portable-air-conditioner-room-size"), undefined);
