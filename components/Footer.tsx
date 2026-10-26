@@ -142,6 +142,14 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <a
+                  href="mailto:contact@aircraftedhome.com"
+                  className="text-[11px] font-mono text-stone-400 hover:text-white transition-colors"
+                >
+                  contact@aircraftedhome.com
+                </a>
+              </li>
+              <li>
                 <Link
                   href="/affiliate-disclosure"
                   className="text-amber-400 hover:text-amber-300 font-bold transition-colors"

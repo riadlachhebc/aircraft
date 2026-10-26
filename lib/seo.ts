@@ -3,6 +3,7 @@ import { Article, Product } from "./types";
 export const SITE_CONFIG = {
   name: "Air Crafted Home",
   domain: "https://aircraftedhome.com",
+  email: "contact@aircraftedhome.com",
   tagline: "Evidence-Based Indoor Climate & Home Comfort Engineering",
   description:
     "Independent research, thermodynamic product comparisons, and transparent operating-cost calculations for US heating, cooling, and indoor air quality.",
@@ -26,9 +27,16 @@ export function buildOrganizationSchema() {
     "@id": `${SITE_CONFIG.domain}/#organization`,
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.domain,
+    email: SITE_CONFIG.email,
     logo: `${SITE_CONFIG.domain}/logo.png`,
     description: SITE_CONFIG.description,
     publishingPrinciples: `${SITE_CONFIG.domain}/editorial-policy`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: SITE_CONFIG.email,
+      contactType: "customer service and editorial inquiries",
+      url: `${SITE_CONFIG.domain}/contact`,
+    },
     knowsAbout: [
       "Residential Air Conditioning",
       "Heating & Thermodynamics",

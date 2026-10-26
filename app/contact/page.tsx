@@ -48,6 +48,25 @@ export default function ContactPage() {
         <div className="lg:col-span-5 space-y-6">
           <div className="rounded-xl border border-stone-200 bg-stone-50/80 p-6 space-y-3 text-xs text-stone-600 leading-relaxed">
             <h3 className="font-serif font-bold text-sm text-stone-900 flex items-center gap-1.5">
+              <Mail className="h-4 w-4 text-forest-700" />
+              Direct Email
+            </h3>
+            <p>
+              Prefer to send an email directly from your mail client? Reach our editorial
+              and technical research desk at:
+            </p>
+            <p className="pt-1">
+              <a
+                href="mailto:contact@aircraftedhome.com"
+                className="font-mono text-xs sm:text-sm font-semibold text-forest-800 hover:text-forest-900 underline underline-offset-2"
+              >
+                contact@aircraftedhome.com
+              </a>
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-stone-200 bg-stone-50/80 p-6 space-y-3 text-xs text-stone-600 leading-relaxed">
+            <h3 className="font-serif font-bold text-sm text-stone-900 flex items-center gap-1.5">
               <Clock className="h-4 w-4 text-forest-700" />
               Response Horizon
             </h3>

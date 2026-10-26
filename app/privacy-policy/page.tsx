@@ -100,7 +100,8 @@ export default function PrivacyPolicyPage() {
             Under state privacy laws such as the California Consumer Privacy Act (CCPA),
             residents have the right to request access to or deletion of any personal
             data held. Because we collect minimal personal data, inquiries can be directed
-            to us through our <a href="/contact" className="underline font-semibold">Contact Page</a>.
+            to us via email at <a href="mailto:contact@aircraftedhome.com" className="underline font-semibold text-stone-900">contact@aircraftedhome.com</a> or
+            through our <a href="/contact" className="underline font-semibold text-stone-900">Contact Page</a>.
           </p>
         </section>
       </div>
